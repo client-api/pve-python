@@ -26,6 +26,25 @@ jobs:
         with:
           python-version: '3.12'
 
+      # The release tag is the authoritative version source — overwrite
+      # pyproject.toml and setup.py with the tag name (minus the leading
+      # `v`) so PyPI sees the value the release was cut at, regardless
+      # of what the SDK was synced with. Enables intra-day releases via
+      # PEP 440 post-release tags: `v2026.5.23-1` → `2026.5.23.post1`,
+      # `v2026.5.23-2` → `2026.5.23.post2`, etc. (PyPI's PEP 440
+      # normalizer rewrites the dash form on upload.) Skipped for
+      # workflow_dispatch runs — the manual trigger uses whatever's
+      # already in the working tree.
+      - name: Set version from release tag
+        if: github.event_name == 'release'
+        run: |
+          set -eu
+          TAG="${GITHUB_REF_NAME#v}"
+          echo "Using version: $TAG (from tag $GITHUB_REF_NAME)"
+          sed -i -E "s/^version = \".*\"/version = \"${TAG}\"/" pyproject.toml
+          sed -i -E "s/^VERSION = \".*\"/VERSION = \"${TAG}\"/" setup.py
+          grep -E '^version|^VERSION' pyproject.toml setup.py
+
       - name: Install build backend
         run: |
           python -m pip install --upgrade pip

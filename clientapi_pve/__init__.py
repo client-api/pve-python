@@ -3101,4 +3101,5 @@ from clientapi_pve.models.storage_update_storage_request import StorageUpdateSto
 from clientapi_pve.models.storage_update_storage_response import StorageUpdateStorageResponse as StorageUpdateStorageResponse
 from clientapi_pve.models.version_version_response import VersionVersionResponse as VersionVersionResponse
 from clientapi_pve.models.version_version_response_data import VersionVersionResponseData as VersionVersionResponseData
-
+from clientapi_pve.client import Client as Client
+from clientapi_pve.pve import Pve as Pve
