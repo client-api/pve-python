@@ -38,7 +38,7 @@ pve = Pve(configuration=cfg)
 # so the call is `pve.qemu.vm_status(...)`, not `pve.qemu.qemu_vm_status(...)` —
 # you're already inside the `qemu` namespace.
 status = pve.qemu.vm_status(node='pve1', vmid=100)
-nodes = pve.nodes.index()
+nodes = pve.nodes.get_nodes()
 ```
 
 ### Discovering available methods
