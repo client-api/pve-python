@@ -27,6 +27,7 @@ from .api.cluster_mapping_api import ClusterMappingApi
 from .api.cluster_metrics_api import ClusterMetricsApi
 from .api.cluster_notifications_api import ClusterNotificationsApi
 from .api.cluster_options_api import ClusterOptionsApi
+from .api.cluster_qemu_api import ClusterQemuApi
 from .api.cluster_replication_api import ClusterReplicationApi
 from .api.cluster_sdn_api import ClusterSdnApi
 from .api.lxc_api import LxcApi
@@ -101,6 +102,7 @@ class Client:
         self._clusterMetrics: Optional[ClusterMetricsApi] = None
         self._clusterNotifications: Optional[ClusterNotificationsApi] = None
         self._clusterOptions: Optional[ClusterOptionsApi] = None
+        self._clusterQemu: Optional[ClusterQemuApi] = None
         self._clusterReplication: Optional[ClusterReplicationApi] = None
         self._clusterSdn: Optional[ClusterSdnApi] = None
         self._lxc: Optional[LxcApi] = None
@@ -277,6 +279,12 @@ class Client:
         if self._clusterOptions is None:
             self._clusterOptions = ClusterOptionsApi(api_client=self._api_client)
         return self._clusterOptions
+
+    @property
+    def clusterQemu(self) -> ClusterQemuApi:
+        if self._clusterQemu is None:
+            self._clusterQemu = ClusterQemuApi(api_client=self._api_client)
+        return self._clusterQemu
 
     @property
     def clusterReplication(self) -> ClusterReplicationApi:

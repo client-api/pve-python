@@ -24,6 +24,7 @@ from pve_client.api.cluster_mapping_api import ClusterMappingApi
 from pve_client.api.cluster_metrics_api import ClusterMetricsApi
 from pve_client.api.cluster_notifications_api import ClusterNotificationsApi
 from pve_client.api.cluster_options_api import ClusterOptionsApi
+from pve_client.api.cluster_qemu_api import ClusterQemuApi
 from pve_client.api.cluster_replication_api import ClusterReplicationApi
 from pve_client.api.cluster_sdn_api import ClusterSdnApi
 from pve_client.api.lxc_api import LxcApi
