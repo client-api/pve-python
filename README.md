@@ -13,7 +13,7 @@ Requires Python ≥ 3.9.
 ## Install
 
 ```bash
-pip install clientapi_pve
+pip install clientapi-pve
 ```
 
 Or for development:
@@ -34,9 +34,24 @@ cfg = Configuration(
 pve = Pve(configuration=cfg)
 
 # Per-tag properties are lazily instantiated and share the same ApiClient.
-status = pve.qemu.qemu_vm_status(node='pve1', vmid=100)
-nodes = pve.nodes.nodes_index()
+# `removeOperationIdPrefix=true` strips the tag prefix from method names,
+# so the call is `pve.qemu.vm_status(...)`, not `pve.qemu.qemu_vm_status(...)` —
+# you're already inside the `qemu` namespace.
+status = pve.qemu.vm_status(node='pve1', vmid=100)
+nodes = pve.nodes.index()
 ```
+
+### Discovering available methods
+
+Each per-tag API class lives at `clientapi_pve.api.<tag>_api.<Tag>Api`.
+List its methods to see what's callable:
+
+```python
+print([m for m in dir(pve.qemu) if not m.startswith('_')])
+```
+
+Generated method-level docstrings explain parameters; the upstream
+endpoint reference is the [PVE API viewer][pve-api].
 
 The unified `Pve` class wraps each per-tag API class (`QemuApi`,
 `LxcApi`, `ClusterApi`, `NodesApi`, …) so consumers don't need to
@@ -77,3 +92,4 @@ req = QemuCreateVmRequest(
 Apache 2.0 — see [LICENSE](./LICENSE).
 
 [gen]: https://openapi-generator.tech
+[pve-api]: https://pve.proxmox.com/pve-docs/api-viewer/
