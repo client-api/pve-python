@@ -32,8 +32,6 @@ class ClusterBulkActionMigrateRequest(BaseModel):
 
     max_workers: Optional[Annotated[int, Field(le=64, strict=True, ge=1)]] = Field(default=1, description="Defines the maximum number of tasks running concurrently.", alias="max-workers")
 
-    maxworkers: Optional[Annotated[int, Field(le=64, strict=True, ge=1)]] = Field(default=1, description="Defines the maximum number of tasks running concurrently. Deprecated, use 'max-workers' instead.")
-
     online: Optional[PveBoolean] = Field(default=None, description="Enable live migration for VMs and restart migration for CTs.")
 
     target: Annotated[str, Field(strict=True)] = Field(description="Target node.")
@@ -42,8 +40,7 @@ class ClusterBulkActionMigrateRequest(BaseModel):
 
     with_local_disks: Optional[PveBoolean] = Field(default=None, description="Enable live storage migration for local disk", alias="with-local-disks")
 
-    __properties: ClassVar[List[str]] = ["max-workers", "maxworkers", "online", "target", "vms", "with-local-disks"]
-
+    __properties: ClassVar[List[str]] = ["max-workers", "online", "target", "vms", "with-local-disks"]
 
 
 
@@ -114,7 +111,6 @@ class ClusterBulkActionMigrateRequest(BaseModel):
 
         _obj = cls.model_validate({
             "max-workers": obj.get("max-workers") if obj.get("max-workers") is not None else 1,
-            "maxworkers": obj.get("maxworkers") if obj.get("maxworkers") is not None else 1,
             "online": obj.get("online"),
             "target": obj.get("target"),
             "vms": obj.get("vms"),

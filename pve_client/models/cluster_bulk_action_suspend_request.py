@@ -32,16 +32,13 @@ class ClusterBulkActionSuspendRequest(BaseModel):
 
     max_workers: Optional[Annotated[int, Field(le=64, strict=True, ge=1)]] = Field(default=4, description="Defines the maximum number of tasks running concurrently.", alias="max-workers")
 
-    maxworkers: Optional[Annotated[int, Field(le=64, strict=True, ge=1)]] = Field(default=4, description="Defines the maximum number of tasks running concurrently. Deprecated, use 'max-workers' instead.")
-
     statestorage: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="The storage for the VM state.")
 
     to_disk: Optional[PveBoolean] = Field(default=None, description="If set, suspends the guests to disk. Will be resumed on next start.", alias="to-disk")
 
     vms: Optional[List[Annotated[int, Field(le=999999999, strict=True, ge=100)]]] = Field(default=None, description="Only consider guests from this list of VMIDs.")
 
-    __properties: ClassVar[List[str]] = ["max-workers", "maxworkers", "statestorage", "to-disk", "vms"]
-
+    __properties: ClassVar[List[str]] = ["max-workers", "statestorage", "to-disk", "vms"]
 
 
 
@@ -114,7 +111,6 @@ class ClusterBulkActionSuspendRequest(BaseModel):
 
         _obj = cls.model_validate({
             "max-workers": obj.get("max-workers") if obj.get("max-workers") is not None else 4,
-            "maxworkers": obj.get("maxworkers") if obj.get("maxworkers") is not None else 4,
             "statestorage": obj.get("statestorage"),
             "to-disk": obj.get("to-disk"),
             "vms": obj.get("vms")

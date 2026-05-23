@@ -34,14 +34,11 @@ class ClusterBulkActionShutdownRequest(BaseModel):
 
     max_workers: Optional[Annotated[int, Field(le=64, strict=True, ge=1)]] = Field(default=4, description="Defines the maximum number of tasks running concurrently.", alias="max-workers")
 
-    maxworkers: Optional[Annotated[int, Field(le=64, strict=True, ge=1)]] = Field(default=4, description="Defines the maximum number of tasks running concurrently. Deprecated, use 'max-workers' instead.")
-
     timeout: Optional[StrictInt] = Field(default=180, description="Default shutdown timeout in seconds if none is configured for the guest.")
 
     vms: Optional[List[Annotated[int, Field(le=999999999, strict=True, ge=100)]]] = Field(default=None, description="Only consider guests from this list of VMIDs.")
 
-    __properties: ClassVar[List[str]] = ["force-stop", "max-workers", "maxworkers", "timeout", "vms"]
-
+    __properties: ClassVar[List[str]] = ["force-stop", "max-workers", "timeout", "vms"]
 
 
 
@@ -102,7 +99,6 @@ class ClusterBulkActionShutdownRequest(BaseModel):
         _obj = cls.model_validate({
             "force-stop": obj.get("force-stop"),
             "max-workers": obj.get("max-workers") if obj.get("max-workers") is not None else 4,
-            "maxworkers": obj.get("maxworkers") if obj.get("maxworkers") is not None else 4,
             "timeout": obj.get("timeout") if obj.get("timeout") is not None else 180,
             "vms": obj.get("vms")
         })

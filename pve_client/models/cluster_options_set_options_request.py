@@ -20,7 +20,6 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
-from pve_client.models.pve_boolean import PveBoolean
 from pve_client.models.pve_bwlimit_field import PveBwlimitField
 from pve_client.models.pve_cluster_options_fencing_enum import PveClusterOptionsFencingEnum
 from pve_client.models.pve_cluster_options_language_enum import PveClusterOptionsLanguageEnum
@@ -78,8 +77,6 @@ class ClusterOptionsSetOptionsRequest(BaseModel):
 
     migration: Optional[PveMigrationField] = Field(default=None, description="For cluster wide migration settings.")
 
-    migration_unsecure: Optional[PveBoolean] = Field(default=None, description="Migration is secure using SSH tunnel by default. For secure private networks you can disable it to speed up migration. Deprecated, use the 'migration' property instead!")
-
     next_id: Optional[PveNextIdField] = Field(default=None, description="Control the range for the free VMID auto-selection pool.", alias="next-id")
 
     notify: Optional[PveNotifyField] = Field(default=None, description="Cluster-wide notification settings.")
@@ -96,7 +93,7 @@ class ClusterOptionsSetOptionsRequest(BaseModel):
 
     webauthn: Optional[PveWebauthnField] = Field(default=None, description="webauthn configuration")
 
-    __properties: ClassVar[List[str]] = ["bwlimit", "consent-text", "console", "crs", "delete", "description", "email_from", "fencing", "ha", "http_proxy", "keyboard", "language", "location", "mac_prefix", "max_workers", "migration", "migration_unsecure", "next-id", "notify", "registered-tags", "replication", "tag-style", "u2f", "user-tag-access", "webauthn"]
+    __properties: ClassVar[List[str]] = ["bwlimit", "consent-text", "console", "crs", "delete", "description", "email_from", "fencing", "ha", "http_proxy", "keyboard", "language", "location", "mac_prefix", "max_workers", "migration", "next-id", "notify", "registered-tags", "replication", "tag-style", "u2f", "user-tag-access", "webauthn"]
 
 
 
@@ -120,7 +117,6 @@ class ClusterOptionsSetOptionsRequest(BaseModel):
         if not re.match(r"http:\/\/.*", value):
             raise ValueError(r"must validate the regular expression /http:\/\/.*/")
         return value
-
 
 
 
@@ -254,7 +250,6 @@ class ClusterOptionsSetOptionsRequest(BaseModel):
             "mac_prefix": obj.get("mac_prefix") if obj.get("mac_prefix") is not None else 'BC:24:11',
             "max_workers": obj.get("max_workers"),
             "migration": PveMigrationField.from_dict(obj["migration"]) if obj.get("migration") is not None else None,
-            "migration_unsecure": obj.get("migration_unsecure"),
             "next-id": PveNextIdField.from_dict(obj["next-id"]) if obj.get("next-id") is not None else None,
             "notify": PveNotifyField.from_dict(obj["notify"]) if obj.get("notify") is not None else None,
             "registered-tags": obj.get("registered-tags"),

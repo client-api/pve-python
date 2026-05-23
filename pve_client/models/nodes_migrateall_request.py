@@ -32,16 +32,13 @@ class NodesMigrateallRequest(BaseModel):
 
     max_workers: Optional[Annotated[int, Field(le=64, strict=True, ge=1)]] = Field(default=None, description="Maximal number of parallel migration job. If not set, uses'max_workers' from datacenter.cfg. One of both must be set!", alias="max-workers")
 
-    maxworkers: Optional[Annotated[int, Field(le=64, strict=True, ge=1)]] = Field(default=None, description="Maximal number of parallel migration job. If not set, uses'max_workers' from datacenter.cfg. One of both must be set!Deprecated, use 'max-workers' instead.")
-
     target: Annotated[str, Field(strict=True)] = Field(description="Target node.")
 
     vms: Optional[StrictStr] = Field(default=None, description="Only consider Guests with these IDs.")
 
     with_local_disks: Optional[PveBoolean] = Field(default=None, description="Enable live storage migration for local disk", alias="with-local-disks")
 
-    __properties: ClassVar[List[str]] = ["max-workers", "maxworkers", "target", "vms", "with-local-disks"]
-
+    __properties: ClassVar[List[str]] = ["max-workers", "target", "vms", "with-local-disks"]
 
 
 
@@ -111,7 +108,6 @@ class NodesMigrateallRequest(BaseModel):
 
         _obj = cls.model_validate({
             "max-workers": obj.get("max-workers"),
-            "maxworkers": obj.get("maxworkers"),
             "target": obj.get("target"),
             "vms": obj.get("vms"),
             "with-local-disks": obj.get("with-local-disks")
