@@ -1,12 +1,12 @@
 # clientapi_pve
 
-Python SDK for the Proxmox Virtual Environment (PVE) API. Generated
-from the upstream `apidoc.js` via [openapi-generator-cli][gen] with
+Python SDK for the Proxmox Virtual Environment API. Generated
+from the upstream `apidoc.js` from Proxmox VE via [openapi-generator-cli][gen] with
 custom Mustache template overrides.
 
 > **Not an official Proxmox project.** Community SDK derived from the
-> upstream `apidoc.js`. Always verify against
-> <https://pve.proxmox.com/pve-docs/api-viewer/>.
+> upstream `apidoc.js`. Always verify against the upstream API viewer.
+> <https://pve.proxmox.com/>.
 
 Requires Python ≥ 3.9.
 
@@ -51,7 +51,7 @@ print([m for m in dir(pve.qemu) if not m.startswith('_')])
 ```
 
 Generated method-level docstrings explain parameters; the upstream
-endpoint reference is the [PVE API viewer][pve-api].
+endpoint reference is the upstream API viewer.
 
 The unified `Pve` class wraps each per-tag API class (`QemuApi`,
 `LxcApi`, `ClusterApi`, `NodesApi`, …) so consumers don't need to
@@ -92,4 +92,4 @@ req = QemuCreateVmRequest(
 Apache 2.0 — see [LICENSE](./LICENSE).
 
 [gen]: https://openapi-generator.tech
-[pve-api]: https://pve.proxmox.com/pve-docs/api-viewer/
+[upstream-docs]: https://pve.proxmox.com/

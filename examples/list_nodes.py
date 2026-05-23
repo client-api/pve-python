@@ -10,8 +10,8 @@ from __future__ import annotations
 
 import os
 
-from pve_client.configuration import Configuration
-from pve_client.pve import Pve
+from clientapi_pve.configuration import Configuration
+from clientapi_pve.pve import Pve
 
 
 def main() -> None:

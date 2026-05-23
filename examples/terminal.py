@@ -15,9 +15,9 @@ import os
 import sys
 import time
 
-from pve_client.configuration import Configuration
-from pve_client.pve import Pve
-from pve_client.websocket import QemuTarget
+from clientapi_pve.configuration import Configuration
+from clientapi_pve.pve import Pve
+from clientapi_pve.websocket import QemuTarget
 
 
 def main() -> None:

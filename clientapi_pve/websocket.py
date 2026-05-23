@@ -325,7 +325,7 @@ class _ApiKeyAuthAttacher(AuthAttacher):
             if slot in api_key:
                 prefix = api_key_prefix.get(slot, "")
                 value = api_key[slot]
-                # PVE's `Authorization: PVEAPIToken=<id>=<secret>` has no
+                # Proxmox VE's `Authorization: PVEAPIToken=<id>=<secret>` has no
                 # space between the prefix and the token, so join with
                 # `+` rather than the OpenAPI-default `prefix + " " + value`.
                 merged = f"{prefix}{value}" if prefix else value

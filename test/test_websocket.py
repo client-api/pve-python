@@ -9,7 +9,7 @@ intentionally pass-through.
 
 from typing import List
 
-from pve_client.websocket import BinaryFrameCodec, TextFrameCodec
+from clientapi_pve.websocket import BinaryFrameCodec, TextFrameCodec
 
 
 def _decode(codec: TextFrameCodec, *chunks: str) -> List[str]:

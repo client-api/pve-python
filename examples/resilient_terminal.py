@@ -13,9 +13,9 @@ import os
 import sys
 import time
 
-from pve_client.configuration import Configuration
-from pve_client.websocket import QemuTarget
-from pve_client.websocket_resilient import RetryOptions, connect_terminal_resilient
+from clientapi_pve.configuration import Configuration
+from clientapi_pve.websocket import QemuTarget
+from clientapi_pve.websocket_resilient import RetryOptions, connect_terminal_resilient
 
 
 def main() -> None:
