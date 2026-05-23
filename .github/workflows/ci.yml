@@ -33,7 +33,7 @@ jobs:
           python - <<'PY'
           import ast, glob, sys
           bad = []
-          for f in glob.glob('pve_client/**/*.py', recursive=True):
+          for f in glob.glob('clientapi_pve/**/*.py', recursive=True):
               try: ast.parse(open(f).read())
               except SyntaxError as e: bad.append((f, str(e)))
           if bad:
@@ -42,4 +42,4 @@ jobs:
           PY
 
       - name: Import check
-        run: python -c "import pve_client; print(pve_client.__version__)"
+        run: python -c "import clientapi_pve; print(clientapi_pve.__version__)"

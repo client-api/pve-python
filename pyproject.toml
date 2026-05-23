@@ -1,6 +1,6 @@
 [project]
-name = "pve_client"
-version = "1.0.0"
+name = "clientapi_pve"
+version = "2026.5.23"
 description = "Proxmox Virtual Environment API"
 authors = [
   {name = "OpenAPI Generator Community",email = "team@openapitools.org"},
@@ -41,7 +41,7 @@ extension-pkg-whitelist = "pydantic"
 
 [tool.mypy]
 files = [
-  "pve_client",
+  "clientapi_pve",
   #"test",  # auto-generated tests
   "tests", # hand-written tests
 ]
@@ -79,7 +79,7 @@ disallow_any_generics = true
 
 [[tool.mypy.overrides]]
 module = [
-  "pve_client.configuration",
+  "clientapi_pve.configuration",
 ]
 warn_unused_ignores = true
 strict_equality = true

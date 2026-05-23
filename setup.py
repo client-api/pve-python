@@ -18,8 +18,8 @@ from setuptools import setup, find_packages  # noqa: H301
 #
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
-NAME = "pve-client"
-VERSION = "1.0.0"
+NAME = "clientapi-pve"
+VERSION = "2026.5.23"
 PYTHON_REQUIRES = ">= 3.10"
 REQUIRES = [
     "urllib3 >= 2.1.0, < 3.0.0",
@@ -44,5 +44,5 @@ setup(
     long_description="""\
     Generated from apidoc.js. NOT an official Proxmox specification. See https://pve.proxmox.com/pve-docs/api-viewer/ for the upstream documentation.
     """,  # noqa: E501
-    package_data={"pve_client": ["py.typed"]},
+    package_data={"clientapi_pve": ["py.typed"]},
 )

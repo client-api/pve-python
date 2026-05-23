@@ -1,4 +1,4 @@
-# pve_client
+# clientapi_pve
 
 Python SDK for the Proxmox Virtual Environment (PVE) API. Generated
 from the upstream `apidoc.js` via [openapi-generator-cli][gen] with
@@ -13,7 +13,7 @@ Requires Python ≥ 3.9.
 ## Install
 
 ```bash
-pip install pve_client
+pip install clientapi_pve
 ```
 
 Or for development:
@@ -25,7 +25,7 @@ pip install -r requirements.txt
 ## Usage
 
 ```python
-from pve_client import Configuration, Pve
+from clientapi_pve import Configuration, Pve
 
 cfg = Configuration(
     host='https://pve1.example.com:8006/api2/json',
@@ -49,7 +49,7 @@ PVE encodes many fields as CLI-style shorthand strings
 emitted for every compound config schema:
 
 ```python
-from pve_client.models import PveQemuNetConfig
+from clientapi_pve.models import PveQemuNetConfig
 
 cfg = PveQemuNetConfig(model='virtio', bridge='vmbr0', firewall=1)
 shorthand = cfg.to_shorthand()  # → 'virtio,bridge=vmbr0,firewall=1'
