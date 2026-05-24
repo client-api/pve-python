@@ -574,7 +574,7 @@ conf = clientapi_pve.Configuration(
                "OS: {env}\n"\
                "Python Version: {pyversion}\n"\
                "Version of the API: 9.x\n"\
-               "SDK Package Version: 2026.5.23".\
+               "SDK Package Version: 2026.5.24".\
                format(env=sys.platform, pyversion=sys.version)
 
     def get_host_settings(self) -> List[HostSetting]:
