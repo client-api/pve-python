@@ -82,7 +82,14 @@ def _cleanup_vms(pve: "Pve", node: str) -> None:
         vmid = getattr(vm, "vmid", None)
         if vmid is None or not (VM_ID_MIN <= int(vmid) <= VM_ID_MAX):
             continue
+        # Stop first if running; PVE rejects destroy on a running VM. The
+        # `skiplock` flag is root@pam-only (token auth can't use it), so we
+        # rely on the VM being in a stopped state before destroy.
         try:
-            pve.qemu.destroy_vm(node=node, vmid=int(vmid), purge=1, skiplock=1)
+            pve.qemu.vm_stop(node=node, vmid=int(vmid))
+        except Exception as exc:
+            log.debug("vm_stop(%s) failed during cleanup: %r", vmid, exc)
+        try:
+            pve.qemu.destroy_vm(node=node, vmid=int(vmid))
         except Exception as exc:
             log.debug("destroy_vm(%s) failed: %r", vmid, exc)

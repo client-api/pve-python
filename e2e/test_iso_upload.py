@@ -50,12 +50,12 @@ def test_iso_download_upload_list_delete(pve: Pve, node: str, iso_storage: str) 
     upload_iso(pve, node, iso_storage, filename, data)
 
     listing = list_storage_content(pve, node, iso_storage)
-    volids = [item.get("volid", "") for item in listing]
+    volids = [item.volid for item in listing]
     matching = [v for v in volids if v.endswith(f"/{filename}")]
     assert matching, f"uploaded ISO not in listing: {volids!r}"
 
     pve.nodesStorage.delete_content(node=node, storage=iso_storage, volume=matching[0])
 
     listing_after = list_storage_content(pve, node, iso_storage)
-    volids_after = [item.get("volid", "") for item in listing_after]
+    volids_after = [item.volid for item in listing_after]
     assert not [v for v in volids_after if v.endswith(f"/{filename}")], volids_after

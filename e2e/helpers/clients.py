@@ -33,9 +33,7 @@ def ticket_client(
     """
     cfg = Configuration(host=f"{creds.url}/api2/json")
     cfg.verify_ssl = not creds.insecure
-    # SDK bug workaround: the auth_settings cookie path emits `Cookie: <value>`
-    # but PVE expects `Cookie: PVEAuthCookie=<value>`. Pre-join here.
-    cfg.api_key["PVEAuthCookie"] = f"PVEAuthCookie={ticket}"
+    cfg.api_key["PVEAuthCookie"] = ticket
     if csrf is not None:
         cfg.api_key["CSRFPreventionToken"] = csrf
     return Pve(cfg)
