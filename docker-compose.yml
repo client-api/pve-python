@@ -1,0 +1,21 @@
+services:
+  pve-test:
+    image: ghcr.io/client-api/proxmox-docker/pve-test:9.2
+    container_name: pve-test
+    privileged: true
+    devices:
+      - /dev/fuse
+      - /dev/kvm
+    tmpfs:
+      - /tmp
+      - /run
+      - /run/lock
+    ports:
+      - "8006:8006"
+    healthcheck:
+      # /version requires auth on PVE 9.x — accept any HTTP response (200/401) as "API is up".
+      test: ["CMD-SHELL", "curl -sk -o /dev/null -w '%{http_code}' https://localhost:8006/api2/json/version | grep -qE '^(200|401)$'"]
+      interval: 5s
+      timeout: 5s
+      retries: 24
+      start_period: 10s
