@@ -114,32 +114,28 @@ class ClusterConfigCreateConfigRequest(BaseModel):
         _dict = self.model_dump(
             by_alias=True,
             exclude=excluded_fields,
+            # `exclude_unset` keeps schema defaults out of the wire payload
+            # when the user constructed the model directly (e.g.
+            # `Req(vmid=100)` would otherwise pull in
+            # `cores=1, cpulimit=0, …` from the spec defaults and PVE
+            # rejects the request with 400 because it never set those).
+            # `exclude_none` keeps None values out of the wire payload —
+            # both for direct construction (None means "unset") and for
+            # the from_dict path (where unspecified obj keys become
+            # `obj.get("k") == None` but show up in `model_fields_set`).
+            exclude_unset=True,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of link0
-        if self.link0:
-            _dict['link0'] = self.link0.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of link1
-        if self.link1:
-            _dict['link1'] = self.link1.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of link2
-        if self.link2:
-            _dict['link2'] = self.link2.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of link3
-        if self.link3:
-            _dict['link3'] = self.link3.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of link4
-        if self.link4:
-            _dict['link4'] = self.link4.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of link5
-        if self.link5:
-            _dict['link5'] = self.link5.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of link6
-        if self.link6:
-            _dict['link6'] = self.link6.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of link7
-        if self.link7:
-            _dict['link7'] = self.link7.to_dict()
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         # Expand the links map back into individual link<n> wire
         # keys that PVE actually accepts.
         if self.links:

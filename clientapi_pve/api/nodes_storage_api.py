@@ -15,8 +15,8 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictStr, field_validator
-from typing import Any, Optional
+from pydantic import Field, StrictBytes, StrictStr, field_validator
+from typing import Any, Optional, Tuple, Union
 from typing_extensions import Annotated
 from clientapi_pve.models.nodes_storage_copy_request import NodesStorageCopyRequest
 from clientapi_pve.models.nodes_storage_copy_response import NodesStorageCopyResponse
@@ -42,7 +42,6 @@ from clientapi_pve.models.nodes_storage_rrd_response import NodesStorageRrdRespo
 from clientapi_pve.models.nodes_storage_rrddata_response import NodesStorageRrddataResponse
 from clientapi_pve.models.nodes_storage_updateattributes_request import NodesStorageUpdateattributesRequest
 from clientapi_pve.models.nodes_storage_updateattributes_response import NodesStorageUpdateattributesResponse
-from clientapi_pve.models.nodes_storage_upload_request import NodesStorageUploadRequest
 from clientapi_pve.models.nodes_storage_upload_response import NodesStorageUploadResponse
 from clientapi_pve.models.pve_cf_enum import PveCfEnum
 from clientapi_pve.models.pve_cluster_backup_info_type_enum import PveClusterBackupInfoTypeEnum
@@ -370,9 +369,13 @@ class NodesStorageApi:
             )
 
         # set the HTTP header `Content-Type`
+        # Only emit Content-Type when there's actually a body/form/file to send.
+        # PVE/PMG Perl HTTP server rejects empty bodies with Content-Type:
+        # application/json ("malformed JSON string"); other Proxmox products are
+        # equally fussy. An explicit `_content_type` override always wins.
         if _content_type:
             _header_params['Content-Type'] = _content_type
-        else:
+        elif _body_params is not None or _form_params or _files:
             _default_content_type = (
                 self.api_client.select_header_content_type(
                     [
@@ -698,9 +701,13 @@ class NodesStorageApi:
             )
 
         # set the HTTP header `Content-Type`
+        # Only emit Content-Type when there's actually a body/form/file to send.
+        # PVE/PMG Perl HTTP server rejects empty bodies with Content-Type:
+        # application/json ("malformed JSON string"); other Proxmox products are
+        # equally fussy. An explicit `_content_type` override always wins.
         if _content_type:
             _header_params['Content-Type'] = _content_type
-        else:
+        elif _body_params is not None or _form_params or _files:
             _default_content_type = (
                 self.api_client.select_header_content_type(
                     [
@@ -2356,9 +2363,13 @@ class NodesStorageApi:
             )
 
         # set the HTTP header `Content-Type`
+        # Only emit Content-Type when there's actually a body/form/file to send.
+        # PVE/PMG Perl HTTP server rejects empty bodies with Content-Type:
+        # application/json ("malformed JSON string"); other Proxmox products are
+        # equally fussy. An explicit `_content_type` override always wins.
         if _content_type:
             _header_params['Content-Type'] = _content_type
-        else:
+        elif _body_params is not None or _form_params or _files:
             _default_content_type = (
                 self.api_client.select_header_content_type(
                     [
@@ -4998,9 +5009,13 @@ class NodesStorageApi:
             )
 
         # set the HTTP header `Content-Type`
+        # Only emit Content-Type when there's actually a body/form/file to send.
+        # PVE/PMG Perl HTTP server rejects empty bodies with Content-Type:
+        # application/json ("malformed JSON string"); other Proxmox products are
+        # equally fussy. An explicit `_content_type` override always wins.
         if _content_type:
             _header_params['Content-Type'] = _content_type
-        else:
+        elif _body_params is not None or _form_params or _files:
             _default_content_type = (
                 self.api_client.select_header_content_type(
                     [
@@ -6323,9 +6338,13 @@ class NodesStorageApi:
             )
 
         # set the HTTP header `Content-Type`
+        # Only emit Content-Type when there's actually a body/form/file to send.
+        # PVE/PMG Perl HTTP server rejects empty bodies with Content-Type:
+        # application/json ("malformed JSON string"); other Proxmox products are
+        # equally fussy. An explicit `_content_type` override always wins.
         if _content_type:
             _header_params['Content-Type'] = _content_type
-        else:
+        elif _body_params is not None or _form_params or _files:
             _default_content_type = (
                 self.api_client.select_header_content_type(
                     [
@@ -6367,7 +6386,10 @@ class NodesStorageApi:
         self,
         node: Annotated[str, Field(strict=True, description="The cluster node name.")],
         storage: Annotated[str, Field(strict=True, description="The storage identifier.")],
-        nodes_storage_upload_request: NodesStorageUploadRequest,
+        content: Annotated[Any, Field(description="Content type.")],
+        filename: Annotated[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]], Field(description="The name of the file to create. Caution: This will be normalized!")],
+        checksum: Annotated[Optional[StrictStr], Field(description="The expected checksum of the file.")] = None,
+        checksum_algorithm: Annotated[Optional[Any], Field(description="The algorithm to calculate the checksum of the file.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6389,8 +6411,14 @@ class NodesStorageApi:
         :type node: str
         :param storage: The storage identifier. (required)
         :type storage: str
-        :param nodes_storage_upload_request: (required)
-        :type nodes_storage_upload_request: NodesStorageUploadRequest
+        :param content: Content type. (required)
+        :type content: PveContentEnum
+        :param filename: The name of the file to create. Caution: This will be normalized! (required)
+        :type filename: bytes
+        :param checksum: The expected checksum of the file.
+        :type checksum: str
+        :param checksum_algorithm: The algorithm to calculate the checksum of the file.
+        :type checksum_algorithm: PveChecksumAlgorithmEnum
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6416,7 +6444,10 @@ class NodesStorageApi:
         _param = self._upload_serialize(
             node=node,
             storage=storage,
-            nodes_storage_upload_request=nodes_storage_upload_request,
+            content=content,
+            filename=filename,
+            checksum=checksum,
+            checksum_algorithm=checksum_algorithm,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6449,7 +6480,10 @@ class NodesStorageApi:
         self,
         node: Annotated[str, Field(strict=True, description="The cluster node name.")],
         storage: Annotated[str, Field(strict=True, description="The storage identifier.")],
-        nodes_storage_upload_request: NodesStorageUploadRequest,
+        content: Annotated[Any, Field(description="Content type.")],
+        filename: Annotated[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]], Field(description="The name of the file to create. Caution: This will be normalized!")],
+        checksum: Annotated[Optional[StrictStr], Field(description="The expected checksum of the file.")] = None,
+        checksum_algorithm: Annotated[Optional[Any], Field(description="The algorithm to calculate the checksum of the file.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6471,8 +6505,14 @@ class NodesStorageApi:
         :type node: str
         :param storage: The storage identifier. (required)
         :type storage: str
-        :param nodes_storage_upload_request: (required)
-        :type nodes_storage_upload_request: NodesStorageUploadRequest
+        :param content: Content type. (required)
+        :type content: PveContentEnum
+        :param filename: The name of the file to create. Caution: This will be normalized! (required)
+        :type filename: bytes
+        :param checksum: The expected checksum of the file.
+        :type checksum: str
+        :param checksum_algorithm: The algorithm to calculate the checksum of the file.
+        :type checksum_algorithm: PveChecksumAlgorithmEnum
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6498,7 +6538,10 @@ class NodesStorageApi:
         _param = self._upload_serialize(
             node=node,
             storage=storage,
-            nodes_storage_upload_request=nodes_storage_upload_request,
+            content=content,
+            filename=filename,
+            checksum=checksum,
+            checksum_algorithm=checksum_algorithm,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6531,7 +6574,10 @@ class NodesStorageApi:
         self,
         node: Annotated[str, Field(strict=True, description="The cluster node name.")],
         storage: Annotated[str, Field(strict=True, description="The storage identifier.")],
-        nodes_storage_upload_request: NodesStorageUploadRequest,
+        content: Annotated[Any, Field(description="Content type.")],
+        filename: Annotated[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]], Field(description="The name of the file to create. Caution: This will be normalized!")],
+        checksum: Annotated[Optional[StrictStr], Field(description="The expected checksum of the file.")] = None,
+        checksum_algorithm: Annotated[Optional[Any], Field(description="The algorithm to calculate the checksum of the file.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6553,8 +6599,14 @@ class NodesStorageApi:
         :type node: str
         :param storage: The storage identifier. (required)
         :type storage: str
-        :param nodes_storage_upload_request: (required)
-        :type nodes_storage_upload_request: NodesStorageUploadRequest
+        :param content: Content type. (required)
+        :type content: PveContentEnum
+        :param filename: The name of the file to create. Caution: This will be normalized! (required)
+        :type filename: bytes
+        :param checksum: The expected checksum of the file.
+        :type checksum: str
+        :param checksum_algorithm: The algorithm to calculate the checksum of the file.
+        :type checksum_algorithm: PveChecksumAlgorithmEnum
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6580,7 +6632,10 @@ class NodesStorageApi:
         _param = self._upload_serialize(
             node=node,
             storage=storage,
-            nodes_storage_upload_request=nodes_storage_upload_request,
+            content=content,
+            filename=filename,
+            checksum=checksum,
+            checksum_algorithm=checksum_algorithm,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6608,7 +6663,10 @@ class NodesStorageApi:
         self,
         node,
         storage,
-        nodes_storage_upload_request,
+        content,
+        filename,
+        checksum,
+        checksum_algorithm,
         _request_auth,
         _content_type,
         _headers,
@@ -6637,9 +6695,15 @@ class NodesStorageApi:
         # process the query parameters
         # process the header parameters
         # process the form parameters
+        if checksum is not None:
+            _form_params.append(('checksum', checksum))
+        if checksum_algorithm is not None:
+            _form_params.append(('checksum-algorithm', checksum_algorithm))
+        if content is not None:
+            _form_params.append(('content', content))
+        if filename is not None:
+            _files['filename'] = filename
         # process the body parameter
-        if nodes_storage_upload_request is not None:
-            _body_params = nodes_storage_upload_request
 
 
         # set the HTTP header `Accept`
@@ -6651,14 +6715,17 @@ class NodesStorageApi:
             )
 
         # set the HTTP header `Content-Type`
+        # Only emit Content-Type when there's actually a body/form/file to send.
+        # PVE/PMG Perl HTTP server rejects empty bodies with Content-Type:
+        # application/json ("malformed JSON string"); other Proxmox products are
+        # equally fussy. An explicit `_content_type` override always wins.
         if _content_type:
             _header_params['Content-Type'] = _content_type
-        else:
+        elif _body_params is not None or _form_params or _files:
             _default_content_type = (
                 self.api_client.select_header_content_type(
                     [
-                        'application/json', 
-                        'application/x-www-form-urlencoded'
+                        'multipart/form-data'
                     ]
                 )
             )

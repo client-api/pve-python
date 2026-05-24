@@ -79,8 +79,20 @@ class NodesSdnBridgesResponseDataInner(BaseModel):
         _dict = self.model_dump(
             by_alias=True,
             exclude=excluded_fields,
+            # `exclude_unset` keeps schema defaults out of the wire payload
+            # when the user constructed the model directly (e.g.
+            # `Req(vmid=100)` would otherwise pull in
+            # `cores=1, cpulimit=0, …` from the spec defaults and PVE
+            # rejects the request with 400 because it never set those).
+            # `exclude_none` keeps None values out of the wire payload —
+            # both for direct construction (None means "unset") and for
+            # the from_dict path (where unspecified obj keys become
+            # `obj.get("k") == None` but show up in `model_fields_set`).
+            exclude_unset=True,
             exclude_none=True,
         )
+        
+        
         # override the default output from pydantic by calling `to_dict()` of each item in ports (list)
         _items = []
         if self.ports:
@@ -88,6 +100,12 @@ class NodesSdnBridgesResponseDataInner(BaseModel):
                 if _item_ports:
                     _items.append(_item_ports.to_dict())
             _dict['ports'] = _items
+        
+        
+        
+        
+        
+        
         return _dict
 
     @classmethod

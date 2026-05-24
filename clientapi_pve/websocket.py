@@ -209,7 +209,7 @@ class NodeTermproxyIssuer(_BaseTicketIssuer[NodeTarget]):
     def _call_api(self, client: ApiClient, target: NodeTarget) -> Any:
         # PVE rejects empty-body POSTs sent with Content-Type: application/json;
         # supply at least an empty dict.
-        return NodesApi(client).termproxy(node=target.node, node_termproxy_request={})
+        return NodesApi(client).termproxy(node=target.node, nodes_termproxy_request={})
     def _base_path(self, target: NodeTarget) -> str:
         return f"/nodes/{quote(target.node, safe='')}"
 
@@ -563,7 +563,12 @@ class ConsoleConnector(Generic[TargetT, SessionT]):
         # ``create_connection`` returns once the upgrade is complete,
         # so the socket is already open here — push the auth inline.
         if self._needs_inband_auth:
-            socket.send(f"{issued.ticket.user}:{issued.ticket.ticket}\n")
+            # Some products (PDM) reject the bare user form on the WS handshake
+            # and require `<user>@<realm>`. defaultRealm is product-defined; PVE
+            # leaves it empty so the ticket-issued user passes through.
+            default_realm = ""
+            user = issued.ticket.user if "@" in issued.ticket.user or not default_realm else f"{issued.ticket.user}@{default_realm}"
+            socket.send(f"{user}:{issued.ticket.ticket}\n")
         return self._session_factory(socket, callbacks)
 
 

@@ -98,23 +98,51 @@ class NodesStatusStatusResponseData(BaseModel):
         _dict = self.model_dump(
             by_alias=True,
             exclude=excluded_fields,
+            # `exclude_unset` keeps schema defaults out of the wire payload
+            # when the user constructed the model directly (e.g.
+            # `Req(vmid=100)` would otherwise pull in
+            # `cores=1, cpulimit=0, …` from the spec defaults and PVE
+            # rejects the request with 400 because it never set those).
+            # `exclude_none` keeps None values out of the wire payload —
+            # both for direct construction (None means "unset") and for
+            # the from_dict path (where unspecified obj keys become
+            # `obj.get("k") == None` but show up in `model_fields_set`).
+            exclude_unset=True,
             exclude_none=True,
         )
+        
         # override the default output from pydantic by calling `to_dict()` of boot_info
         if self.boot_info:
             _dict['boot-info'] = self.boot_info.to_dict()
+        
+        
         # override the default output from pydantic by calling `to_dict()` of cpuinfo
         if self.cpuinfo:
             _dict['cpuinfo'] = self.cpuinfo.to_dict()
+        
         # override the default output from pydantic by calling `to_dict()` of current_kernel
         if self.current_kernel:
             _dict['current-kernel'] = self.current_kernel.to_dict()
+        
+        
         # override the default output from pydantic by calling `to_dict()` of memory
         if self.memory:
             _dict['memory'] = self.memory.to_dict()
+        
+        
         # override the default output from pydantic by calling `to_dict()` of rootfs
         if self.rootfs:
             _dict['rootfs'] = self.rootfs.to_dict()
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         return _dict
 
     @classmethod

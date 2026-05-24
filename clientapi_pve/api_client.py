@@ -672,7 +672,12 @@ class ApiClient:
         :param auth_setting: auth settings for the endpoint
         """
         if auth_setting['in'] == 'cookie':
-            headers['Cookie'] = auth_setting['value']
+            # HTTP Cookie header syntax is `Cookie: <name>=<value>`. The
+            # default openapi-generator template emits just the value, which
+            # breaks PVE/PBS/PMG/PDM ticket auth (`Cookie: <ticket>` lands
+            # as 401 No ticket). Prepend the cookie name so the server can
+            # parse the value back into its expected slot.
+            headers['Cookie'] = f"{auth_setting['key']}={auth_setting['value']}"
         elif auth_setting['in'] == 'header':
             if auth_setting['type'] != 'http-signature':
                 headers[auth_setting['key']] = auth_setting['value']

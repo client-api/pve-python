@@ -29,6 +29,10 @@ class PveSdnIpamNetboxConfig(BaseModel):
     PveSdnIpamNetboxConfig
     """ # noqa: E501
 
+    ipam: Annotated[str, Field(min_length=2, strict=True)] = Field(description="The SDN ipam object identifier.")
+
+    lock_token: Optional[StrictStr] = Field(default=None, description="the token for unlocking the global SDN configuration", alias="lock-token")
+
     url: StrictStr
 
     token: StrictStr
@@ -37,7 +41,19 @@ class PveSdnIpamNetboxConfig(BaseModel):
 
     type: StrictStr
 
-    __properties: ClassVar[List[str]] = ["url", "token", "fingerprint", "type"]
+    __properties: ClassVar[List[str]] = ["ipam", "lock-token", "url", "token", "fingerprint", "type"]
+
+
+    @field_validator('ipam')
+    def ipam_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if not isinstance(value, str):
+            value = str(value)
+
+        if not re.match(r"[a-zA-Z][a-zA-Z0-9]*[a-zA-Z0-9]", value):
+            raise ValueError(r"must validate the regular expression /[a-zA-Z][a-zA-Z0-9]*[a-zA-Z0-9]/")
+        return value
+
 
 
 
@@ -102,8 +118,32 @@ class PveSdnIpamNetboxConfig(BaseModel):
         _dict = self.model_dump(
             by_alias=True,
             exclude=excluded_fields,
+            # `exclude_unset` keeps schema defaults out of the wire payload
+            # when the user constructed the model directly (e.g.
+            # `Req(vmid=100)` would otherwise pull in
+            # `cores=1, cpulimit=0, …` from the spec defaults and PVE
+            # rejects the request with 400 because it never set those).
+            # `exclude_none` keeps None values out of the wire payload —
+            # both for direct construction (None means "unset") and for
+            # the from_dict path (where unspecified obj keys become
+            # `obj.get("k") == None` but show up in `model_fields_set`).
+            exclude_unset=True,
             exclude_none=True,
         )
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         return _dict
 
     @classmethod
@@ -116,6 +156,8 @@ class PveSdnIpamNetboxConfig(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "ipam": obj.get("ipam"),
+            "lock-token": obj.get("lock-token"),
             "url": obj.get("url"),
             "token": obj.get("token"),
             "fingerprint": obj.get("fingerprint"),

@@ -1016,7 +1016,6 @@ __all__ = [
     "NodesStorageRrddataResponse",
     "NodesStorageUpdateattributesRequest",
     "NodesStorageUpdateattributesResponse",
-    "NodesStorageUploadRequest",
     "NodesStorageUploadResponse",
     "NodesSubscriptionCreateSubscriptionRequest",
     "NodesSubscriptionCreateSubscriptionResponse",
@@ -2561,7 +2560,6 @@ from clientapi_pve.models.nodes_storage_rrd_response import NodesStorageRrdRespo
 from clientapi_pve.models.nodes_storage_rrddata_response import NodesStorageRrddataResponse as NodesStorageRrddataResponse
 from clientapi_pve.models.nodes_storage_updateattributes_request import NodesStorageUpdateattributesRequest as NodesStorageUpdateattributesRequest
 from clientapi_pve.models.nodes_storage_updateattributes_response import NodesStorageUpdateattributesResponse as NodesStorageUpdateattributesResponse
-from clientapi_pve.models.nodes_storage_upload_request import NodesStorageUploadRequest as NodesStorageUploadRequest
 from clientapi_pve.models.nodes_storage_upload_response import NodesStorageUploadResponse as NodesStorageUploadResponse
 from clientapi_pve.models.nodes_subscription_create_subscription_request import NodesSubscriptionCreateSubscriptionRequest as NodesSubscriptionCreateSubscriptionRequest
 from clientapi_pve.models.nodes_subscription_create_subscription_response import NodesSubscriptionCreateSubscriptionResponse as NodesSubscriptionCreateSubscriptionResponse

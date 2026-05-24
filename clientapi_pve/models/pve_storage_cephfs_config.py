@@ -32,6 +32,10 @@ class PveStorageCephfsConfig(BaseModel):
     PveStorageCephfsConfig
     """ # noqa: E501
 
+    authsupported: Optional[StrictStr] = Field(default=None, description="Authsupported.")
+
+    storage: Annotated[str, Field(strict=True)] = Field(description="The storage identifier.")
+
     path: StrictStr = Field(description="File system path.")
 
     content_dirs: Optional[StrictStr] = Field(default=None, description="Overrides for default content type directories.", alias="content-dirs")
@@ -72,7 +76,19 @@ class PveStorageCephfsConfig(BaseModel):
 
     type: StrictStr
 
-    __properties: ClassVar[List[str]] = ["path", "content-dirs", "monhost", "nodes", "subdir", "disable", "options", "username", "content", "format", "mkdir", "create-base-path", "create-subdirs", "fuse", "bwlimit", "keyring", "prune-backups", "max-protected-backups", "fs-name", "type"]
+    __properties: ClassVar[List[str]] = ["authsupported", "storage", "path", "content-dirs", "monhost", "nodes", "subdir", "disable", "options", "username", "content", "format", "mkdir", "create-base-path", "create-subdirs", "fuse", "bwlimit", "keyring", "prune-backups", "max-protected-backups", "fs-name", "type"]
+
+
+
+    @field_validator('storage')
+    def storage_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if not isinstance(value, str):
+            value = str(value)
+
+        if not re.match(r"^[a-z][a-z0-9\-_.]*[a-z0-9]$", value):
+            raise ValueError(r"must validate the regular expression /^[a-z][a-z0-9\-_.]*[a-z0-9]$/")
+        return value
 
 
 
@@ -153,11 +169,67 @@ class PveStorageCephfsConfig(BaseModel):
         _dict = self.model_dump(
             by_alias=True,
             exclude=excluded_fields,
+            # `exclude_unset` keeps schema defaults out of the wire payload
+            # when the user constructed the model directly (e.g.
+            # `Req(vmid=100)` would otherwise pull in
+            # `cores=1, cpulimit=0, …` from the spec defaults and PVE
+            # rejects the request with 400 because it never set those).
+            # `exclude_none` keeps None values out of the wire payload —
+            # both for direct construction (None means "unset") and for
+            # the from_dict path (where unspecified obj keys become
+            # `obj.get("k") == None` but show up in `model_fields_set`).
+            exclude_unset=True,
             exclude_none=True,
         )
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         # override the default output from pydantic by calling `to_dict()` of bwlimit
         if self.bwlimit:
             _dict['bwlimit'] = self.bwlimit.to_dict()
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         return _dict
 
     @classmethod
@@ -170,6 +242,8 @@ class PveStorageCephfsConfig(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "authsupported": obj.get("authsupported"),
+            "storage": obj.get("storage"),
             "path": obj.get("path"),
             "content-dirs": obj.get("content-dirs"),
             "monhost": obj.get("monhost"),

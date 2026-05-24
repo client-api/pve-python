@@ -31,6 +31,12 @@ class PveSdnZoneQinqConfig(BaseModel):
     PveSdnZoneQinqConfig
     """ # noqa: E501
 
+    lock_token: Optional[StrictStr] = Field(default=None, description="the token for unlocking the global SDN configuration", alias="lock-token")
+
+    secondary_controllers: Optional[List[Annotated[str, Field(min_length=2, strict=True, max_length=64)]]] = Field(default=None, description="Additional controllers.", alias="secondary-controllers")
+
+    zone: Annotated[str, Field(min_length=2, strict=True, max_length=8)] = Field(description="The SDN zone object identifier.")
+
     nodes: Optional[StrictStr] = Field(default=None, description="List of cluster node names.")
 
     tag: Annotated[int, Field(strict=True, ge=0)] = Field(description="Service-VLAN Tag (outer VLAN)")
@@ -53,7 +59,20 @@ class PveSdnZoneQinqConfig(BaseModel):
 
     type: StrictStr
 
-    __properties: ClassVar[List[str]] = ["nodes", "tag", "bridge", "bridge-disable-mac-learning", "mtu", "vlan-protocol", "dns", "reversedns", "dnszone", "ipam", "type"]
+    __properties: ClassVar[List[str]] = ["lock-token", "secondary-controllers", "zone", "nodes", "tag", "bridge", "bridge-disable-mac-learning", "mtu", "vlan-protocol", "dns", "reversedns", "dnszone", "ipam", "type"]
+
+
+
+
+    @field_validator('zone')
+    def zone_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if not isinstance(value, str):
+            value = str(value)
+
+        if not re.match(r"[a-zA-Z][a-zA-Z0-9]*[a-zA-Z0-9]", value):
+            raise ValueError(r"must validate the regular expression /[a-zA-Z][a-zA-Z0-9]*[a-zA-Z0-9]/")
+        return value
 
 
 
@@ -125,8 +144,48 @@ class PveSdnZoneQinqConfig(BaseModel):
         _dict = self.model_dump(
             by_alias=True,
             exclude=excluded_fields,
+            # `exclude_unset` keeps schema defaults out of the wire payload
+            # when the user constructed the model directly (e.g.
+            # `Req(vmid=100)` would otherwise pull in
+            # `cores=1, cpulimit=0, …` from the spec defaults and PVE
+            # rejects the request with 400 because it never set those).
+            # `exclude_none` keeps None values out of the wire payload —
+            # both for direct construction (None means "unset") and for
+            # the from_dict path (where unspecified obj keys become
+            # `obj.get("k") == None` but show up in `model_fields_set`).
+            exclude_unset=True,
             exclude_none=True,
         )
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         return _dict
 
     @classmethod
@@ -139,6 +198,9 @@ class PveSdnZoneQinqConfig(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "lock-token": obj.get("lock-token"),
+            "secondary-controllers": obj.get("secondary-controllers"),
+            "zone": obj.get("zone"),
             "nodes": obj.get("nodes"),
             "tag": obj.get("tag"),
             "bridge": obj.get("bridge"),

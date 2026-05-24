@@ -30,6 +30,12 @@ class PveRealmOpenidConfig(BaseModel):
     PveRealmOpenidConfig
     """ # noqa: E501
 
+    audiences: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="A list of audiences that the OpenID Issuer may include that are accepted in addition to 'client-id'.")
+
+    check_connection: Optional[PveBoolean] = Field(default=None, description="Check bind connection to the server.", alias="check-connection")
+
+    realm: Annotated[str, Field(strict=True, max_length=32)] = Field(description="Authentication domain ID")
+
     issuer_url: Annotated[str, Field(strict=True, max_length=256)] = Field(description="OpenID Issuer Url", alias="issuer-url")
 
     client_id: Annotated[str, Field(strict=True, max_length=256)] = Field(description="OpenID Client ID", alias="client-id")
@@ -60,7 +66,33 @@ class PveRealmOpenidConfig(BaseModel):
 
     type: StrictStr
 
-    __properties: ClassVar[List[str]] = ["issuer-url", "client-id", "client-key", "autocreate", "username-claim", "groups-claim", "groups-autocreate", "groups-overwrite", "prompt", "scopes", "acr-values", "default", "comment", "query-userinfo", "type"]
+    __properties: ClassVar[List[str]] = ["audiences", "check-connection", "realm", "issuer-url", "client-id", "client-key", "autocreate", "username-claim", "groups-claim", "groups-autocreate", "groups-overwrite", "prompt", "scopes", "acr-values", "default", "comment", "query-userinfo", "type"]
+
+
+    @field_validator('audiences')
+    def audiences_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if value is None:
+            return value
+
+        if not isinstance(value, str):
+            value = str(value)
+
+        if not re.match(r"^[^\x00-\x1F\x7F <>#\u0022]*$", value):
+            raise ValueError(r"must validate the regular expression /^[^\x00-\x1F\x7F <>#\u0022]*$/")
+        return value
+
+
+
+    @field_validator('realm')
+    def realm_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if not isinstance(value, str):
+            value = str(value)
+
+        if not re.match(r"^[A-Za-z][A-Za-z0-9.\-_]+$", value):
+            raise ValueError(r"must validate the regular expression /^[A-Za-z][A-Za-z0-9.\-_]+$/")
+        return value
 
 
 
@@ -162,8 +194,56 @@ class PveRealmOpenidConfig(BaseModel):
         _dict = self.model_dump(
             by_alias=True,
             exclude=excluded_fields,
+            # `exclude_unset` keeps schema defaults out of the wire payload
+            # when the user constructed the model directly (e.g.
+            # `Req(vmid=100)` would otherwise pull in
+            # `cores=1, cpulimit=0, …` from the spec defaults and PVE
+            # rejects the request with 400 because it never set those).
+            # `exclude_none` keeps None values out of the wire payload —
+            # both for direct construction (None means "unset") and for
+            # the from_dict path (where unspecified obj keys become
+            # `obj.get("k") == None` but show up in `model_fields_set`).
+            exclude_unset=True,
             exclude_none=True,
         )
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         return _dict
 
     @classmethod
@@ -176,6 +256,9 @@ class PveRealmOpenidConfig(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "audiences": obj.get("audiences"),
+            "check-connection": obj.get("check-connection"),
+            "realm": obj.get("realm"),
             "issuer-url": obj.get("issuer-url"),
             "client-id": obj.get("client-id"),
             "client-key": obj.get("client-key"),

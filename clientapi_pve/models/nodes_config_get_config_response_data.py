@@ -116,44 +116,43 @@ class NodesConfigGetConfigResponseData(BaseModel):
         _dict = self.model_dump(
             by_alias=True,
             exclude=excluded_fields,
+            # `exclude_unset` keeps schema defaults out of the wire payload
+            # when the user constructed the model directly (e.g.
+            # `Req(vmid=100)` would otherwise pull in
+            # `cores=1, cpulimit=0, …` from the spec defaults and PVE
+            # rejects the request with 400 because it never set those).
+            # `exclude_none` keeps None values out of the wire payload —
+            # both for direct construction (None means "unset") and for
+            # the from_dict path (where unspecified obj keys become
+            # `obj.get("k") == None` but show up in `model_fields_set`).
+            exclude_unset=True,
             exclude_none=True,
         )
+        
         # override the default output from pydantic by calling `to_dict()` of acme
         if self.acme:
             _dict['acme'] = self.acme.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of acmedomain0
-        if self.acmedomain0:
-            _dict['acmedomain0'] = self.acmedomain0.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of acmedomain1
-        if self.acmedomain1:
-            _dict['acmedomain1'] = self.acmedomain1.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of acmedomain2
-        if self.acmedomain2:
-            _dict['acmedomain2'] = self.acmedomain2.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of acmedomain3
-        if self.acmedomain3:
-            _dict['acmedomain3'] = self.acmedomain3.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of acmedomain4
-        if self.acmedomain4:
-            _dict['acmedomain4'] = self.acmedomain4.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of acmedomain5
-        if self.acmedomain5:
-            _dict['acmedomain5'] = self.acmedomain5.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of acmedomain6
-        if self.acmedomain6:
-            _dict['acmedomain6'] = self.acmedomain6.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of acmedomain7
-        if self.acmedomain7:
-            _dict['acmedomain7'] = self.acmedomain7.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of acmedomain8
-        if self.acmedomain8:
-            _dict['acmedomain8'] = self.acmedomain8.to_dict()
+        
+        
+        
+        
         # override the default output from pydantic by calling `to_dict()` of location
         if self.location:
             _dict['location'] = self.location.to_dict()
+        
+        
         # override the default output from pydantic by calling `to_dict()` of wakeonlan
         if self.wakeonlan:
             _dict['wakeonlan'] = self.wakeonlan.to_dict()
+        
+        
+        
+        
+        
+        
+        
+        
+        
         # Expand the acmedomains map back into individual acmedomain<n> wire
         # keys that PVE actually accepts.
         if self.acmedomains:

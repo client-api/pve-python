@@ -17,8 +17,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -28,9 +29,25 @@ class PveSdnIpamPveConfig(BaseModel):
     PveSdnIpamPveConfig
     """ # noqa: E501
 
+    ipam: Annotated[str, Field(min_length=2, strict=True)] = Field(description="The SDN ipam object identifier.")
+
+    lock_token: Optional[StrictStr] = Field(default=None, description="the token for unlocking the global SDN configuration", alias="lock-token")
+
     type: StrictStr
 
-    __properties: ClassVar[List[str]] = ["type"]
+    __properties: ClassVar[List[str]] = ["ipam", "lock-token", "type"]
+
+
+    @field_validator('ipam')
+    def ipam_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if not isinstance(value, str):
+            value = str(value)
+
+        if not re.match(r"[a-zA-Z][a-zA-Z0-9]*[a-zA-Z0-9]", value):
+            raise ValueError(r"must validate the regular expression /[a-zA-Z][a-zA-Z0-9]*[a-zA-Z0-9]/")
+        return value
+
 
 
     @field_validator('type')
@@ -79,8 +96,26 @@ class PveSdnIpamPveConfig(BaseModel):
         _dict = self.model_dump(
             by_alias=True,
             exclude=excluded_fields,
+            # `exclude_unset` keeps schema defaults out of the wire payload
+            # when the user constructed the model directly (e.g.
+            # `Req(vmid=100)` would otherwise pull in
+            # `cores=1, cpulimit=0, …` from the spec defaults and PVE
+            # rejects the request with 400 because it never set those).
+            # `exclude_none` keeps None values out of the wire payload —
+            # both for direct construction (None means "unset") and for
+            # the from_dict path (where unspecified obj keys become
+            # `obj.get("k") == None` but show up in `model_fields_set`).
+            exclude_unset=True,
             exclude_none=True,
         )
+        
+        
+        
+        
+        
+        
+        
+        
         return _dict
 
     @classmethod
@@ -93,6 +128,8 @@ class PveSdnIpamPveConfig(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "ipam": obj.get("ipam"),
+            "lock-token": obj.get("lock-token"),
             "type": obj.get("type")
         })
         return _obj

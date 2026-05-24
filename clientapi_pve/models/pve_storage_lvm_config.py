@@ -32,6 +32,10 @@ class PveStorageLvmConfig(BaseModel):
     PveStorageLvmConfig
     """ # noqa: E501
 
+    authsupported: Optional[StrictStr] = Field(default=None, description="Authsupported.")
+
+    storage: Annotated[str, Field(strict=True)] = Field(description="The storage identifier.")
+
     vgname: StrictStr = Field(description="Volume group name.")
 
     nodes: Optional[StrictStr] = Field(default=None, description="List of nodes for which the storage configuration applies.")
@@ -58,7 +62,19 @@ class PveStorageLvmConfig(BaseModel):
 
     type: StrictStr
 
-    __properties: ClassVar[List[str]] = ["vgname", "nodes", "shared", "disable", "saferemove", "saferemove-stepsize", "saferemove_throughput", "content", "base", "tagged_only", "bwlimit", "snapshot-as-volume-chain", "type"]
+    __properties: ClassVar[List[str]] = ["authsupported", "storage", "vgname", "nodes", "shared", "disable", "saferemove", "saferemove-stepsize", "saferemove_throughput", "content", "base", "tagged_only", "bwlimit", "snapshot-as-volume-chain", "type"]
+
+
+
+    @field_validator('storage')
+    def storage_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if not isinstance(value, str):
+            value = str(value)
+
+        if not re.match(r"^[a-z][a-z0-9\-_.]*[a-z0-9]$", value):
+            raise ValueError(r"must validate the regular expression /^[a-z][a-z0-9\-_.]*[a-z0-9]$/")
+        return value
 
 
 
@@ -132,11 +148,53 @@ class PveStorageLvmConfig(BaseModel):
         _dict = self.model_dump(
             by_alias=True,
             exclude=excluded_fields,
+            # `exclude_unset` keeps schema defaults out of the wire payload
+            # when the user constructed the model directly (e.g.
+            # `Req(vmid=100)` would otherwise pull in
+            # `cores=1, cpulimit=0, …` from the spec defaults and PVE
+            # rejects the request with 400 because it never set those).
+            # `exclude_none` keeps None values out of the wire payload —
+            # both for direct construction (None means "unset") and for
+            # the from_dict path (where unspecified obj keys become
+            # `obj.get("k") == None` but show up in `model_fields_set`).
+            exclude_unset=True,
             exclude_none=True,
         )
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         # override the default output from pydantic by calling `to_dict()` of bwlimit
         if self.bwlimit:
             _dict['bwlimit'] = self.bwlimit.to_dict()
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         return _dict
 
     @classmethod
@@ -149,6 +207,8 @@ class PveStorageLvmConfig(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "authsupported": obj.get("authsupported"),
+            "storage": obj.get("storage"),
             "vgname": obj.get("vgname"),
             "nodes": obj.get("nodes"),
             "shared": obj.get("shared"),

@@ -30,6 +30,10 @@ class PveStoragePbsConfig(BaseModel):
     PveStoragePbsConfig
     """ # noqa: E501
 
+    authsupported: Optional[StrictStr] = Field(default=None, description="Authsupported.")
+
+    storage: Annotated[str, Field(strict=True)] = Field(description="The storage identifier.")
+
     server: StrictStr = Field(description="Server IP or DNS name.")
 
     datastore: StrictStr = Field(description="Proxmox Backup Server datastore name.")
@@ -60,7 +64,19 @@ class PveStoragePbsConfig(BaseModel):
 
     type: StrictStr
 
-    __properties: ClassVar[List[str]] = ["server", "datastore", "namespace", "port", "nodes", "disable", "content", "username", "password", "encryption-key", "master-pubkey", "prune-backups", "max-protected-backups", "fingerprint", "type"]
+    __properties: ClassVar[List[str]] = ["authsupported", "storage", "server", "datastore", "namespace", "port", "nodes", "disable", "content", "username", "password", "encryption-key", "master-pubkey", "prune-backups", "max-protected-backups", "fingerprint", "type"]
+
+
+
+    @field_validator('storage')
+    def storage_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if not isinstance(value, str):
+            value = str(value)
+
+        if not re.match(r"^[a-z][a-z0-9\-_.]*[a-z0-9]$", value):
+            raise ValueError(r"must validate the regular expression /^[a-z][a-z0-9\-_.]*[a-z0-9]$/")
+        return value
 
 
 
@@ -136,8 +152,54 @@ class PveStoragePbsConfig(BaseModel):
         _dict = self.model_dump(
             by_alias=True,
             exclude=excluded_fields,
+            # `exclude_unset` keeps schema defaults out of the wire payload
+            # when the user constructed the model directly (e.g.
+            # `Req(vmid=100)` would otherwise pull in
+            # `cores=1, cpulimit=0, …` from the spec defaults and PVE
+            # rejects the request with 400 because it never set those).
+            # `exclude_none` keeps None values out of the wire payload —
+            # both for direct construction (None means "unset") and for
+            # the from_dict path (where unspecified obj keys become
+            # `obj.get("k") == None` but show up in `model_fields_set`).
+            exclude_unset=True,
             exclude_none=True,
         )
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         return _dict
 
     @classmethod
@@ -150,6 +212,8 @@ class PveStoragePbsConfig(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "authsupported": obj.get("authsupported"),
+            "storage": obj.get("storage"),
             "server": obj.get("server"),
             "datastore": obj.get("datastore"),
             "namespace": obj.get("namespace"),

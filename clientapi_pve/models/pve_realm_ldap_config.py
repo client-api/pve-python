@@ -32,6 +32,12 @@ class PveRealmLdapConfig(BaseModel):
     PveRealmLdapConfig
     """ # noqa: E501
 
+    audiences: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="A list of audiences that the OpenID Issuer may include that are accepted in addition to 'client-id'.")
+
+    check_connection: Optional[PveBoolean] = Field(default=None, description="Check bind connection to the server.", alias="check-connection")
+
+    realm: Annotated[str, Field(strict=True, max_length=32)] = Field(description="Authentication domain ID")
+
     server1: Annotated[str, Field(strict=True, max_length=256)] = Field(description="Server IP address (or DNS name)")
 
     server2: Optional[Annotated[str, Field(strict=True, max_length=256)]] = Field(default=None, description="Fallback Server IP address (or DNS name)")
@@ -86,7 +92,33 @@ class PveRealmLdapConfig(BaseModel):
 
     type: StrictStr
 
-    __properties: ClassVar[List[str]] = ["server1", "server2", "base_dn", "bind_dn", "password", "user_attr", "port", "secure", "sslversion", "default", "comment", "tfa", "verify", "capath", "cert", "certkey", "filter", "sync_attributes", "user_classes", "group_dn", "group_name_attr", "group_filter", "group_classes", "sync-defaults-options", "mode", "case-sensitive", "type"]
+    __properties: ClassVar[List[str]] = ["audiences", "check-connection", "realm", "server1", "server2", "base_dn", "bind_dn", "password", "user_attr", "port", "secure", "sslversion", "default", "comment", "tfa", "verify", "capath", "cert", "certkey", "filter", "sync_attributes", "user_classes", "group_dn", "group_name_attr", "group_filter", "group_classes", "sync-defaults-options", "mode", "case-sensitive", "type"]
+
+
+    @field_validator('audiences')
+    def audiences_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if value is None:
+            return value
+
+        if not isinstance(value, str):
+            value = str(value)
+
+        if not re.match(r"^[^\x00-\x1F\x7F <>#\u0022]*$", value):
+            raise ValueError(r"must validate the regular expression /^[^\x00-\x1F\x7F <>#\u0022]*$/")
+        return value
+
+
+
+    @field_validator('realm')
+    def realm_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if not isinstance(value, str):
+            value = str(value)
+
+        if not re.match(r"^[A-Za-z][A-Za-z0-9.\-_]+$", value):
+            raise ValueError(r"must validate the regular expression /^[A-Za-z][A-Za-z0-9.\-_]+$/")
+        return value
 
 
     @field_validator('server1')
@@ -207,8 +239,80 @@ class PveRealmLdapConfig(BaseModel):
         _dict = self.model_dump(
             by_alias=True,
             exclude=excluded_fields,
+            # `exclude_unset` keeps schema defaults out of the wire payload
+            # when the user constructed the model directly (e.g.
+            # `Req(vmid=100)` would otherwise pull in
+            # `cores=1, cpulimit=0, …` from the spec defaults and PVE
+            # rejects the request with 400 because it never set those).
+            # `exclude_none` keeps None values out of the wire payload —
+            # both for direct construction (None means "unset") and for
+            # the from_dict path (where unspecified obj keys become
+            # `obj.get("k") == None` but show up in `model_fields_set`).
+            exclude_unset=True,
             exclude_none=True,
         )
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         return _dict
 
     @classmethod
@@ -221,6 +325,9 @@ class PveRealmLdapConfig(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "audiences": obj.get("audiences"),
+            "check-connection": obj.get("check-connection"),
+            "realm": obj.get("realm"),
             "server1": obj.get("server1"),
             "server2": obj.get("server2"),
             "base_dn": obj.get("base_dn"),

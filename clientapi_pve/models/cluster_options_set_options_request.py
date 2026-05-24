@@ -184,44 +184,104 @@ class ClusterOptionsSetOptionsRequest(BaseModel):
         _dict = self.model_dump(
             by_alias=True,
             exclude=excluded_fields,
+            # `exclude_unset` keeps schema defaults out of the wire payload
+            # when the user constructed the model directly (e.g.
+            # `Req(vmid=100)` would otherwise pull in
+            # `cores=1, cpulimit=0, …` from the spec defaults and PVE
+            # rejects the request with 400 because it never set those).
+            # `exclude_none` keeps None values out of the wire payload —
+            # both for direct construction (None means "unset") and for
+            # the from_dict path (where unspecified obj keys become
+            # `obj.get("k") == None` but show up in `model_fields_set`).
+            exclude_unset=True,
             exclude_none=True,
         )
+        
         # override the default output from pydantic by calling `to_dict()` of bwlimit
         if self.bwlimit:
             _dict['bwlimit'] = self.bwlimit.to_dict()
+        
+        
+        
         # override the default output from pydantic by calling `to_dict()` of crs
         if self.crs:
             _dict['crs'] = self.crs.to_dict()
+        
+        
+        
+        
+        
         # override the default output from pydantic by calling `to_dict()` of ha
         if self.ha:
             _dict['ha'] = self.ha.to_dict()
+        
+        
+        
+        
         # override the default output from pydantic by calling `to_dict()` of location
         if self.location:
             _dict['location'] = self.location.to_dict()
+        
+        
+        
         # override the default output from pydantic by calling `to_dict()` of migration
         if self.migration:
             _dict['migration'] = self.migration.to_dict()
+        
         # override the default output from pydantic by calling `to_dict()` of next_id
         if self.next_id:
             _dict['next-id'] = self.next_id.to_dict()
+        
         # override the default output from pydantic by calling `to_dict()` of notify
         if self.notify:
             _dict['notify'] = self.notify.to_dict()
+        
+        
         # override the default output from pydantic by calling `to_dict()` of replication
         if self.replication:
             _dict['replication'] = self.replication.to_dict()
+        
         # override the default output from pydantic by calling `to_dict()` of tag_style
         if self.tag_style:
             _dict['tag-style'] = self.tag_style.to_dict()
+        
         # override the default output from pydantic by calling `to_dict()` of u2f
         if self.u2f:
             _dict['u2f'] = self.u2f.to_dict()
+        
         # override the default output from pydantic by calling `to_dict()` of user_tag_access
         if self.user_tag_access:
             _dict['user-tag-access'] = self.user_tag_access.to_dict()
+        
         # override the default output from pydantic by calling `to_dict()` of webauthn
         if self.webauthn:
             _dict['webauthn'] = self.webauthn.to_dict()
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         return _dict
 
     @classmethod

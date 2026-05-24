@@ -627,1141 +627,210 @@ CAUTION: Experimental! User reported problems with this option.
         _dict = self.model_dump(
             by_alias=True,
             exclude=excluded_fields,
+            # `exclude_unset` keeps schema defaults out of the wire payload
+            # when the user constructed the model directly (e.g.
+            # `Req(vmid=100)` would otherwise pull in
+            # `cores=1, cpulimit=0, …` from the spec defaults and PVE
+            # rejects the request with 400 because it never set those).
+            # `exclude_none` keeps None values out of the wire payload —
+            # both for direct construction (None means "unset") and for
+            # the from_dict path (where unspecified obj keys become
+            # `obj.get("k") == None` but show up in `model_fields_set`).
+            exclude_unset=True,
             exclude_none=True,
         )
+        
+        
+        
         # override the default output from pydantic by calling `to_dict()` of agent
         if self.agent:
             _dict['agent'] = self.agent.to_dict()
+        
+        
+        
+        
+        
+        
         # override the default output from pydantic by calling `to_dict()` of audio0
         if self.audio0:
             _dict['audio0'] = self.audio0.to_dict()
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         # override the default output from pydantic by calling `to_dict()` of efidisk0
         if self.efidisk0:
             _dict['efidisk0'] = self.efidisk0.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of ide0
-        if self.ide0:
-            _dict['ide0'] = self.ide0.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of ide1
-        if self.ide1:
-            _dict['ide1'] = self.ide1.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of ide2
-        if self.ide2:
-            _dict['ide2'] = self.ide2.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of ide3
-        if self.ide3:
-            _dict['ide3'] = self.ide3.to_dict()
+        
+        
+        
+        
+        
+        
+        
+        
+        
         # override the default output from pydantic by calling `to_dict()` of ivshmem
         if self.ivshmem:
             _dict['ivshmem'] = self.ivshmem.to_dict()
+        
+        
+        
+        
+        
+        
+        
         # override the default output from pydantic by calling `to_dict()` of machine
         if self.machine:
             _dict['machine'] = self.machine.to_dict()
+        
         # override the default output from pydantic by calling `to_dict()` of memory
         if self.memory:
             _dict['memory'] = self.memory.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of net0
-        if self.net0:
-            _dict['net0'] = self.net0.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of net1
-        if self.net1:
-            _dict['net1'] = self.net1.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of net2
-        if self.net2:
-            _dict['net2'] = self.net2.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of net3
-        if self.net3:
-            _dict['net3'] = self.net3.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of net4
-        if self.net4:
-            _dict['net4'] = self.net4.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of net5
-        if self.net5:
-            _dict['net5'] = self.net5.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of net6
-        if self.net6:
-            _dict['net6'] = self.net6.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of net7
-        if self.net7:
-            _dict['net7'] = self.net7.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of net8
-        if self.net8:
-            _dict['net8'] = self.net8.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of net9
-        if self.net9:
-            _dict['net9'] = self.net9.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of net10
-        if self.net10:
-            _dict['net10'] = self.net10.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of net11
-        if self.net11:
-            _dict['net11'] = self.net11.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of net12
-        if self.net12:
-            _dict['net12'] = self.net12.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of net13
-        if self.net13:
-            _dict['net13'] = self.net13.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of net14
-        if self.net14:
-            _dict['net14'] = self.net14.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of net15
-        if self.net15:
-            _dict['net15'] = self.net15.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of net16
-        if self.net16:
-            _dict['net16'] = self.net16.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of net17
-        if self.net17:
-            _dict['net17'] = self.net17.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of net18
-        if self.net18:
-            _dict['net18'] = self.net18.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of net19
-        if self.net19:
-            _dict['net19'] = self.net19.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of net20
-        if self.net20:
-            _dict['net20'] = self.net20.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of net21
-        if self.net21:
-            _dict['net21'] = self.net21.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of net22
-        if self.net22:
-            _dict['net22'] = self.net22.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of net23
-        if self.net23:
-            _dict['net23'] = self.net23.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of net24
-        if self.net24:
-            _dict['net24'] = self.net24.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of net25
-        if self.net25:
-            _dict['net25'] = self.net25.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of net26
-        if self.net26:
-            _dict['net26'] = self.net26.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of net27
-        if self.net27:
-            _dict['net27'] = self.net27.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of net28
-        if self.net28:
-            _dict['net28'] = self.net28.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of net29
-        if self.net29:
-            _dict['net29'] = self.net29.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of net30
-        if self.net30:
-            _dict['net30'] = self.net30.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of net31
-        if self.net31:
-            _dict['net31'] = self.net31.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of numa0
-        if self.numa0:
-            _dict['numa0'] = self.numa0.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of numa1
-        if self.numa1:
-            _dict['numa1'] = self.numa1.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of numa2
-        if self.numa2:
-            _dict['numa2'] = self.numa2.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of numa3
-        if self.numa3:
-            _dict['numa3'] = self.numa3.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of numa4
-        if self.numa4:
-            _dict['numa4'] = self.numa4.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of numa5
-        if self.numa5:
-            _dict['numa5'] = self.numa5.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of numa6
-        if self.numa6:
-            _dict['numa6'] = self.numa6.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of numa7
-        if self.numa7:
-            _dict['numa7'] = self.numa7.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of sata0
-        if self.sata0:
-            _dict['sata0'] = self.sata0.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of sata1
-        if self.sata1:
-            _dict['sata1'] = self.sata1.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of sata2
-        if self.sata2:
-            _dict['sata2'] = self.sata2.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of sata3
-        if self.sata3:
-            _dict['sata3'] = self.sata3.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of sata4
-        if self.sata4:
-            _dict['sata4'] = self.sata4.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of sata5
-        if self.sata5:
-            _dict['sata5'] = self.sata5.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of scsi0
-        if self.scsi0:
-            _dict['scsi0'] = self.scsi0.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of scsi1
-        if self.scsi1:
-            _dict['scsi1'] = self.scsi1.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of scsi2
-        if self.scsi2:
-            _dict['scsi2'] = self.scsi2.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of scsi3
-        if self.scsi3:
-            _dict['scsi3'] = self.scsi3.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of scsi4
-        if self.scsi4:
-            _dict['scsi4'] = self.scsi4.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of scsi5
-        if self.scsi5:
-            _dict['scsi5'] = self.scsi5.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of scsi6
-        if self.scsi6:
-            _dict['scsi6'] = self.scsi6.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of scsi7
-        if self.scsi7:
-            _dict['scsi7'] = self.scsi7.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of scsi8
-        if self.scsi8:
-            _dict['scsi8'] = self.scsi8.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of scsi9
-        if self.scsi9:
-            _dict['scsi9'] = self.scsi9.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of scsi10
-        if self.scsi10:
-            _dict['scsi10'] = self.scsi10.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of scsi11
-        if self.scsi11:
-            _dict['scsi11'] = self.scsi11.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of scsi12
-        if self.scsi12:
-            _dict['scsi12'] = self.scsi12.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of scsi13
-        if self.scsi13:
-            _dict['scsi13'] = self.scsi13.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of scsi14
-        if self.scsi14:
-            _dict['scsi14'] = self.scsi14.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of scsi15
-        if self.scsi15:
-            _dict['scsi15'] = self.scsi15.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of scsi16
-        if self.scsi16:
-            _dict['scsi16'] = self.scsi16.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of scsi17
-        if self.scsi17:
-            _dict['scsi17'] = self.scsi17.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of scsi18
-        if self.scsi18:
-            _dict['scsi18'] = self.scsi18.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of scsi19
-        if self.scsi19:
-            _dict['scsi19'] = self.scsi19.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of scsi20
-        if self.scsi20:
-            _dict['scsi20'] = self.scsi20.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of scsi21
-        if self.scsi21:
-            _dict['scsi21'] = self.scsi21.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of scsi22
-        if self.scsi22:
-            _dict['scsi22'] = self.scsi22.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of scsi23
-        if self.scsi23:
-            _dict['scsi23'] = self.scsi23.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of scsi24
-        if self.scsi24:
-            _dict['scsi24'] = self.scsi24.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of scsi25
-        if self.scsi25:
-            _dict['scsi25'] = self.scsi25.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of scsi26
-        if self.scsi26:
-            _dict['scsi26'] = self.scsi26.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of scsi27
-        if self.scsi27:
-            _dict['scsi27'] = self.scsi27.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of scsi28
-        if self.scsi28:
-            _dict['scsi28'] = self.scsi28.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of scsi29
-        if self.scsi29:
-            _dict['scsi29'] = self.scsi29.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of scsi30
-        if self.scsi30:
-            _dict['scsi30'] = self.scsi30.to_dict()
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         # override the default output from pydantic by calling `to_dict()` of spice_enhancements
         if self.spice_enhancements:
             _dict['spice_enhancements'] = self.spice_enhancements.to_dict()
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         # override the default output from pydantic by calling `to_dict()` of tpmstate0
         if self.tpmstate0:
             _dict['tpmstate0'] = self.tpmstate0.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused0
-        if self.unused0:
-            _dict['unused0'] = self.unused0.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused1
-        if self.unused1:
-            _dict['unused1'] = self.unused1.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused2
-        if self.unused2:
-            _dict['unused2'] = self.unused2.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused3
-        if self.unused3:
-            _dict['unused3'] = self.unused3.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused4
-        if self.unused4:
-            _dict['unused4'] = self.unused4.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused5
-        if self.unused5:
-            _dict['unused5'] = self.unused5.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused6
-        if self.unused6:
-            _dict['unused6'] = self.unused6.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused7
-        if self.unused7:
-            _dict['unused7'] = self.unused7.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused8
-        if self.unused8:
-            _dict['unused8'] = self.unused8.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused9
-        if self.unused9:
-            _dict['unused9'] = self.unused9.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused10
-        if self.unused10:
-            _dict['unused10'] = self.unused10.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused11
-        if self.unused11:
-            _dict['unused11'] = self.unused11.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused12
-        if self.unused12:
-            _dict['unused12'] = self.unused12.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused13
-        if self.unused13:
-            _dict['unused13'] = self.unused13.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused14
-        if self.unused14:
-            _dict['unused14'] = self.unused14.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused15
-        if self.unused15:
-            _dict['unused15'] = self.unused15.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused16
-        if self.unused16:
-            _dict['unused16'] = self.unused16.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused17
-        if self.unused17:
-            _dict['unused17'] = self.unused17.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused18
-        if self.unused18:
-            _dict['unused18'] = self.unused18.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused19
-        if self.unused19:
-            _dict['unused19'] = self.unused19.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused20
-        if self.unused20:
-            _dict['unused20'] = self.unused20.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused21
-        if self.unused21:
-            _dict['unused21'] = self.unused21.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused22
-        if self.unused22:
-            _dict['unused22'] = self.unused22.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused23
-        if self.unused23:
-            _dict['unused23'] = self.unused23.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused24
-        if self.unused24:
-            _dict['unused24'] = self.unused24.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused25
-        if self.unused25:
-            _dict['unused25'] = self.unused25.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused26
-        if self.unused26:
-            _dict['unused26'] = self.unused26.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused27
-        if self.unused27:
-            _dict['unused27'] = self.unused27.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused28
-        if self.unused28:
-            _dict['unused28'] = self.unused28.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused29
-        if self.unused29:
-            _dict['unused29'] = self.unused29.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused30
-        if self.unused30:
-            _dict['unused30'] = self.unused30.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused31
-        if self.unused31:
-            _dict['unused31'] = self.unused31.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused32
-        if self.unused32:
-            _dict['unused32'] = self.unused32.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused33
-        if self.unused33:
-            _dict['unused33'] = self.unused33.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused34
-        if self.unused34:
-            _dict['unused34'] = self.unused34.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused35
-        if self.unused35:
-            _dict['unused35'] = self.unused35.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused36
-        if self.unused36:
-            _dict['unused36'] = self.unused36.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused37
-        if self.unused37:
-            _dict['unused37'] = self.unused37.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused38
-        if self.unused38:
-            _dict['unused38'] = self.unused38.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused39
-        if self.unused39:
-            _dict['unused39'] = self.unused39.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused40
-        if self.unused40:
-            _dict['unused40'] = self.unused40.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused41
-        if self.unused41:
-            _dict['unused41'] = self.unused41.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused42
-        if self.unused42:
-            _dict['unused42'] = self.unused42.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused43
-        if self.unused43:
-            _dict['unused43'] = self.unused43.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused44
-        if self.unused44:
-            _dict['unused44'] = self.unused44.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused45
-        if self.unused45:
-            _dict['unused45'] = self.unused45.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused46
-        if self.unused46:
-            _dict['unused46'] = self.unused46.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused47
-        if self.unused47:
-            _dict['unused47'] = self.unused47.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused48
-        if self.unused48:
-            _dict['unused48'] = self.unused48.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused49
-        if self.unused49:
-            _dict['unused49'] = self.unused49.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused50
-        if self.unused50:
-            _dict['unused50'] = self.unused50.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused51
-        if self.unused51:
-            _dict['unused51'] = self.unused51.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused52
-        if self.unused52:
-            _dict['unused52'] = self.unused52.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused53
-        if self.unused53:
-            _dict['unused53'] = self.unused53.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused54
-        if self.unused54:
-            _dict['unused54'] = self.unused54.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused55
-        if self.unused55:
-            _dict['unused55'] = self.unused55.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused56
-        if self.unused56:
-            _dict['unused56'] = self.unused56.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused57
-        if self.unused57:
-            _dict['unused57'] = self.unused57.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused58
-        if self.unused58:
-            _dict['unused58'] = self.unused58.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused59
-        if self.unused59:
-            _dict['unused59'] = self.unused59.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused60
-        if self.unused60:
-            _dict['unused60'] = self.unused60.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused61
-        if self.unused61:
-            _dict['unused61'] = self.unused61.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused62
-        if self.unused62:
-            _dict['unused62'] = self.unused62.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused63
-        if self.unused63:
-            _dict['unused63'] = self.unused63.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused64
-        if self.unused64:
-            _dict['unused64'] = self.unused64.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused65
-        if self.unused65:
-            _dict['unused65'] = self.unused65.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused66
-        if self.unused66:
-            _dict['unused66'] = self.unused66.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused67
-        if self.unused67:
-            _dict['unused67'] = self.unused67.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused68
-        if self.unused68:
-            _dict['unused68'] = self.unused68.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused69
-        if self.unused69:
-            _dict['unused69'] = self.unused69.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused70
-        if self.unused70:
-            _dict['unused70'] = self.unused70.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused71
-        if self.unused71:
-            _dict['unused71'] = self.unused71.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused72
-        if self.unused72:
-            _dict['unused72'] = self.unused72.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused73
-        if self.unused73:
-            _dict['unused73'] = self.unused73.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused74
-        if self.unused74:
-            _dict['unused74'] = self.unused74.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused75
-        if self.unused75:
-            _dict['unused75'] = self.unused75.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused76
-        if self.unused76:
-            _dict['unused76'] = self.unused76.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused77
-        if self.unused77:
-            _dict['unused77'] = self.unused77.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused78
-        if self.unused78:
-            _dict['unused78'] = self.unused78.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused79
-        if self.unused79:
-            _dict['unused79'] = self.unused79.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused80
-        if self.unused80:
-            _dict['unused80'] = self.unused80.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused81
-        if self.unused81:
-            _dict['unused81'] = self.unused81.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused82
-        if self.unused82:
-            _dict['unused82'] = self.unused82.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused83
-        if self.unused83:
-            _dict['unused83'] = self.unused83.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused84
-        if self.unused84:
-            _dict['unused84'] = self.unused84.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused85
-        if self.unused85:
-            _dict['unused85'] = self.unused85.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused86
-        if self.unused86:
-            _dict['unused86'] = self.unused86.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused87
-        if self.unused87:
-            _dict['unused87'] = self.unused87.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused88
-        if self.unused88:
-            _dict['unused88'] = self.unused88.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused89
-        if self.unused89:
-            _dict['unused89'] = self.unused89.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused90
-        if self.unused90:
-            _dict['unused90'] = self.unused90.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused91
-        if self.unused91:
-            _dict['unused91'] = self.unused91.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused92
-        if self.unused92:
-            _dict['unused92'] = self.unused92.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused93
-        if self.unused93:
-            _dict['unused93'] = self.unused93.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused94
-        if self.unused94:
-            _dict['unused94'] = self.unused94.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused95
-        if self.unused95:
-            _dict['unused95'] = self.unused95.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused96
-        if self.unused96:
-            _dict['unused96'] = self.unused96.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused97
-        if self.unused97:
-            _dict['unused97'] = self.unused97.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused98
-        if self.unused98:
-            _dict['unused98'] = self.unused98.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused99
-        if self.unused99:
-            _dict['unused99'] = self.unused99.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused100
-        if self.unused100:
-            _dict['unused100'] = self.unused100.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused101
-        if self.unused101:
-            _dict['unused101'] = self.unused101.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused102
-        if self.unused102:
-            _dict['unused102'] = self.unused102.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused103
-        if self.unused103:
-            _dict['unused103'] = self.unused103.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused104
-        if self.unused104:
-            _dict['unused104'] = self.unused104.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused105
-        if self.unused105:
-            _dict['unused105'] = self.unused105.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused106
-        if self.unused106:
-            _dict['unused106'] = self.unused106.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused107
-        if self.unused107:
-            _dict['unused107'] = self.unused107.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused108
-        if self.unused108:
-            _dict['unused108'] = self.unused108.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused109
-        if self.unused109:
-            _dict['unused109'] = self.unused109.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused110
-        if self.unused110:
-            _dict['unused110'] = self.unused110.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused111
-        if self.unused111:
-            _dict['unused111'] = self.unused111.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused112
-        if self.unused112:
-            _dict['unused112'] = self.unused112.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused113
-        if self.unused113:
-            _dict['unused113'] = self.unused113.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused114
-        if self.unused114:
-            _dict['unused114'] = self.unused114.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused115
-        if self.unused115:
-            _dict['unused115'] = self.unused115.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused116
-        if self.unused116:
-            _dict['unused116'] = self.unused116.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused117
-        if self.unused117:
-            _dict['unused117'] = self.unused117.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused118
-        if self.unused118:
-            _dict['unused118'] = self.unused118.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused119
-        if self.unused119:
-            _dict['unused119'] = self.unused119.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused120
-        if self.unused120:
-            _dict['unused120'] = self.unused120.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused121
-        if self.unused121:
-            _dict['unused121'] = self.unused121.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused122
-        if self.unused122:
-            _dict['unused122'] = self.unused122.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused123
-        if self.unused123:
-            _dict['unused123'] = self.unused123.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused124
-        if self.unused124:
-            _dict['unused124'] = self.unused124.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused125
-        if self.unused125:
-            _dict['unused125'] = self.unused125.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused126
-        if self.unused126:
-            _dict['unused126'] = self.unused126.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused127
-        if self.unused127:
-            _dict['unused127'] = self.unused127.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused128
-        if self.unused128:
-            _dict['unused128'] = self.unused128.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused129
-        if self.unused129:
-            _dict['unused129'] = self.unused129.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused130
-        if self.unused130:
-            _dict['unused130'] = self.unused130.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused131
-        if self.unused131:
-            _dict['unused131'] = self.unused131.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused132
-        if self.unused132:
-            _dict['unused132'] = self.unused132.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused133
-        if self.unused133:
-            _dict['unused133'] = self.unused133.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused134
-        if self.unused134:
-            _dict['unused134'] = self.unused134.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused135
-        if self.unused135:
-            _dict['unused135'] = self.unused135.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused136
-        if self.unused136:
-            _dict['unused136'] = self.unused136.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused137
-        if self.unused137:
-            _dict['unused137'] = self.unused137.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused138
-        if self.unused138:
-            _dict['unused138'] = self.unused138.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused139
-        if self.unused139:
-            _dict['unused139'] = self.unused139.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused140
-        if self.unused140:
-            _dict['unused140'] = self.unused140.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused141
-        if self.unused141:
-            _dict['unused141'] = self.unused141.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused142
-        if self.unused142:
-            _dict['unused142'] = self.unused142.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused143
-        if self.unused143:
-            _dict['unused143'] = self.unused143.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused144
-        if self.unused144:
-            _dict['unused144'] = self.unused144.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused145
-        if self.unused145:
-            _dict['unused145'] = self.unused145.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused146
-        if self.unused146:
-            _dict['unused146'] = self.unused146.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused147
-        if self.unused147:
-            _dict['unused147'] = self.unused147.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused148
-        if self.unused148:
-            _dict['unused148'] = self.unused148.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused149
-        if self.unused149:
-            _dict['unused149'] = self.unused149.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused150
-        if self.unused150:
-            _dict['unused150'] = self.unused150.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused151
-        if self.unused151:
-            _dict['unused151'] = self.unused151.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused152
-        if self.unused152:
-            _dict['unused152'] = self.unused152.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused153
-        if self.unused153:
-            _dict['unused153'] = self.unused153.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused154
-        if self.unused154:
-            _dict['unused154'] = self.unused154.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused155
-        if self.unused155:
-            _dict['unused155'] = self.unused155.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused156
-        if self.unused156:
-            _dict['unused156'] = self.unused156.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused157
-        if self.unused157:
-            _dict['unused157'] = self.unused157.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused158
-        if self.unused158:
-            _dict['unused158'] = self.unused158.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused159
-        if self.unused159:
-            _dict['unused159'] = self.unused159.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused160
-        if self.unused160:
-            _dict['unused160'] = self.unused160.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused161
-        if self.unused161:
-            _dict['unused161'] = self.unused161.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused162
-        if self.unused162:
-            _dict['unused162'] = self.unused162.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused163
-        if self.unused163:
-            _dict['unused163'] = self.unused163.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused164
-        if self.unused164:
-            _dict['unused164'] = self.unused164.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused165
-        if self.unused165:
-            _dict['unused165'] = self.unused165.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused166
-        if self.unused166:
-            _dict['unused166'] = self.unused166.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused167
-        if self.unused167:
-            _dict['unused167'] = self.unused167.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused168
-        if self.unused168:
-            _dict['unused168'] = self.unused168.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused169
-        if self.unused169:
-            _dict['unused169'] = self.unused169.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused170
-        if self.unused170:
-            _dict['unused170'] = self.unused170.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused171
-        if self.unused171:
-            _dict['unused171'] = self.unused171.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused172
-        if self.unused172:
-            _dict['unused172'] = self.unused172.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused173
-        if self.unused173:
-            _dict['unused173'] = self.unused173.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused174
-        if self.unused174:
-            _dict['unused174'] = self.unused174.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused175
-        if self.unused175:
-            _dict['unused175'] = self.unused175.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused176
-        if self.unused176:
-            _dict['unused176'] = self.unused176.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused177
-        if self.unused177:
-            _dict['unused177'] = self.unused177.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused178
-        if self.unused178:
-            _dict['unused178'] = self.unused178.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused179
-        if self.unused179:
-            _dict['unused179'] = self.unused179.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused180
-        if self.unused180:
-            _dict['unused180'] = self.unused180.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused181
-        if self.unused181:
-            _dict['unused181'] = self.unused181.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused182
-        if self.unused182:
-            _dict['unused182'] = self.unused182.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused183
-        if self.unused183:
-            _dict['unused183'] = self.unused183.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused184
-        if self.unused184:
-            _dict['unused184'] = self.unused184.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused185
-        if self.unused185:
-            _dict['unused185'] = self.unused185.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused186
-        if self.unused186:
-            _dict['unused186'] = self.unused186.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused187
-        if self.unused187:
-            _dict['unused187'] = self.unused187.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused188
-        if self.unused188:
-            _dict['unused188'] = self.unused188.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused189
-        if self.unused189:
-            _dict['unused189'] = self.unused189.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused190
-        if self.unused190:
-            _dict['unused190'] = self.unused190.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused191
-        if self.unused191:
-            _dict['unused191'] = self.unused191.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused192
-        if self.unused192:
-            _dict['unused192'] = self.unused192.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused193
-        if self.unused193:
-            _dict['unused193'] = self.unused193.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused194
-        if self.unused194:
-            _dict['unused194'] = self.unused194.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused195
-        if self.unused195:
-            _dict['unused195'] = self.unused195.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused196
-        if self.unused196:
-            _dict['unused196'] = self.unused196.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused197
-        if self.unused197:
-            _dict['unused197'] = self.unused197.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused198
-        if self.unused198:
-            _dict['unused198'] = self.unused198.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused199
-        if self.unused199:
-            _dict['unused199'] = self.unused199.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused200
-        if self.unused200:
-            _dict['unused200'] = self.unused200.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused201
-        if self.unused201:
-            _dict['unused201'] = self.unused201.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused202
-        if self.unused202:
-            _dict['unused202'] = self.unused202.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused203
-        if self.unused203:
-            _dict['unused203'] = self.unused203.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused204
-        if self.unused204:
-            _dict['unused204'] = self.unused204.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused205
-        if self.unused205:
-            _dict['unused205'] = self.unused205.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused206
-        if self.unused206:
-            _dict['unused206'] = self.unused206.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused207
-        if self.unused207:
-            _dict['unused207'] = self.unused207.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused208
-        if self.unused208:
-            _dict['unused208'] = self.unused208.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused209
-        if self.unused209:
-            _dict['unused209'] = self.unused209.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused210
-        if self.unused210:
-            _dict['unused210'] = self.unused210.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused211
-        if self.unused211:
-            _dict['unused211'] = self.unused211.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused212
-        if self.unused212:
-            _dict['unused212'] = self.unused212.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused213
-        if self.unused213:
-            _dict['unused213'] = self.unused213.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused214
-        if self.unused214:
-            _dict['unused214'] = self.unused214.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused215
-        if self.unused215:
-            _dict['unused215'] = self.unused215.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused216
-        if self.unused216:
-            _dict['unused216'] = self.unused216.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused217
-        if self.unused217:
-            _dict['unused217'] = self.unused217.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused218
-        if self.unused218:
-            _dict['unused218'] = self.unused218.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused219
-        if self.unused219:
-            _dict['unused219'] = self.unused219.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused220
-        if self.unused220:
-            _dict['unused220'] = self.unused220.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused221
-        if self.unused221:
-            _dict['unused221'] = self.unused221.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused222
-        if self.unused222:
-            _dict['unused222'] = self.unused222.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused223
-        if self.unused223:
-            _dict['unused223'] = self.unused223.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused224
-        if self.unused224:
-            _dict['unused224'] = self.unused224.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused225
-        if self.unused225:
-            _dict['unused225'] = self.unused225.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused226
-        if self.unused226:
-            _dict['unused226'] = self.unused226.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused227
-        if self.unused227:
-            _dict['unused227'] = self.unused227.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused228
-        if self.unused228:
-            _dict['unused228'] = self.unused228.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused229
-        if self.unused229:
-            _dict['unused229'] = self.unused229.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused230
-        if self.unused230:
-            _dict['unused230'] = self.unused230.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused231
-        if self.unused231:
-            _dict['unused231'] = self.unused231.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused232
-        if self.unused232:
-            _dict['unused232'] = self.unused232.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused233
-        if self.unused233:
-            _dict['unused233'] = self.unused233.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused234
-        if self.unused234:
-            _dict['unused234'] = self.unused234.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused235
-        if self.unused235:
-            _dict['unused235'] = self.unused235.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused236
-        if self.unused236:
-            _dict['unused236'] = self.unused236.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused237
-        if self.unused237:
-            _dict['unused237'] = self.unused237.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused238
-        if self.unused238:
-            _dict['unused238'] = self.unused238.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused239
-        if self.unused239:
-            _dict['unused239'] = self.unused239.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused240
-        if self.unused240:
-            _dict['unused240'] = self.unused240.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused241
-        if self.unused241:
-            _dict['unused241'] = self.unused241.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused242
-        if self.unused242:
-            _dict['unused242'] = self.unused242.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused243
-        if self.unused243:
-            _dict['unused243'] = self.unused243.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused244
-        if self.unused244:
-            _dict['unused244'] = self.unused244.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused245
-        if self.unused245:
-            _dict['unused245'] = self.unused245.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused246
-        if self.unused246:
-            _dict['unused246'] = self.unused246.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused247
-        if self.unused247:
-            _dict['unused247'] = self.unused247.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused248
-        if self.unused248:
-            _dict['unused248'] = self.unused248.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused249
-        if self.unused249:
-            _dict['unused249'] = self.unused249.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused250
-        if self.unused250:
-            _dict['unused250'] = self.unused250.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused251
-        if self.unused251:
-            _dict['unused251'] = self.unused251.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused252
-        if self.unused252:
-            _dict['unused252'] = self.unused252.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused253
-        if self.unused253:
-            _dict['unused253'] = self.unused253.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused254
-        if self.unused254:
-            _dict['unused254'] = self.unused254.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of unused255
-        if self.unused255:
-            _dict['unused255'] = self.unused255.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of usb0
-        if self.usb0:
-            _dict['usb0'] = self.usb0.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of usb1
-        if self.usb1:
-            _dict['usb1'] = self.usb1.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of usb2
-        if self.usb2:
-            _dict['usb2'] = self.usb2.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of usb3
-        if self.usb3:
-            _dict['usb3'] = self.usb3.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of usb4
-        if self.usb4:
-            _dict['usb4'] = self.usb4.to_dict()
+        
+        
+        
         # override the default output from pydantic by calling `to_dict()` of vga
         if self.vga:
             _dict['vga'] = self.vga.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of virtio0
-        if self.virtio0:
-            _dict['virtio0'] = self.virtio0.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of virtio1
-        if self.virtio1:
-            _dict['virtio1'] = self.virtio1.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of virtio2
-        if self.virtio2:
-            _dict['virtio2'] = self.virtio2.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of virtio3
-        if self.virtio3:
-            _dict['virtio3'] = self.virtio3.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of virtio4
-        if self.virtio4:
-            _dict['virtio4'] = self.virtio4.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of virtio5
-        if self.virtio5:
-            _dict['virtio5'] = self.virtio5.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of virtio6
-        if self.virtio6:
-            _dict['virtio6'] = self.virtio6.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of virtio7
-        if self.virtio7:
-            _dict['virtio7'] = self.virtio7.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of virtio8
-        if self.virtio8:
-            _dict['virtio8'] = self.virtio8.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of virtio9
-        if self.virtio9:
-            _dict['virtio9'] = self.virtio9.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of virtio10
-        if self.virtio10:
-            _dict['virtio10'] = self.virtio10.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of virtio11
-        if self.virtio11:
-            _dict['virtio11'] = self.virtio11.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of virtio12
-        if self.virtio12:
-            _dict['virtio12'] = self.virtio12.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of virtio13
-        if self.virtio13:
-            _dict['virtio13'] = self.virtio13.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of virtio14
-        if self.virtio14:
-            _dict['virtio14'] = self.virtio14.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of virtio15
-        if self.virtio15:
-            _dict['virtio15'] = self.virtio15.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of virtiofs0
-        if self.virtiofs0:
-            _dict['virtiofs0'] = self.virtiofs0.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of virtiofs1
-        if self.virtiofs1:
-            _dict['virtiofs1'] = self.virtiofs1.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of virtiofs2
-        if self.virtiofs2:
-            _dict['virtiofs2'] = self.virtiofs2.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of virtiofs3
-        if self.virtiofs3:
-            _dict['virtiofs3'] = self.virtiofs3.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of virtiofs4
-        if self.virtiofs4:
-            _dict['virtiofs4'] = self.virtiofs4.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of virtiofs5
-        if self.virtiofs5:
-            _dict['virtiofs5'] = self.virtiofs5.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of virtiofs6
-        if self.virtiofs6:
-            _dict['virtiofs6'] = self.virtiofs6.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of virtiofs7
-        if self.virtiofs7:
-            _dict['virtiofs7'] = self.virtiofs7.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of virtiofs8
-        if self.virtiofs8:
-            _dict['virtiofs8'] = self.virtiofs8.to_dict()
+        
+        
+        
+        
+        
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         # Expand the hostpcis map back into individual hostpci<n> wire
         # keys that PVE actually accepts.
         if self.hostpcis:

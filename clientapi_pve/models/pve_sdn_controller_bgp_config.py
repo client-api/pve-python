@@ -20,6 +20,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from clientapi_pve.models.pve_bgp_mode_enum import PveBgpModeEnum
 from clientapi_pve.models.pve_boolean import PveBoolean
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,6 +30,20 @@ class PveSdnControllerBgpConfig(BaseModel):
     """
     PveSdnControllerBgpConfig
     """ # noqa: E501
+
+    bgp_mode: Optional[PveBgpModeEnum] = Field(default=None, description="Whether to use eBGP or iBGP. Auto mode chooses depending on BGP controller or falls back to iBGP.", alias="bgp-mode")
+
+    controller: Annotated[str, Field(min_length=2, strict=True, max_length=64)] = Field(description="The SDN controller object identifier.")
+
+    lock_token: Optional[StrictStr] = Field(default=None, description="the token for unlocking the global SDN configuration", alias="lock-token")
+
+    nodes: Optional[StrictStr] = Field(default=None, description="List of cluster node names.")
+
+    peer_group_name: Optional[Annotated[str, Field(strict=True)]] = Field(default='VTEP', description="Name of the peer group for this EVPN controller", alias="peer-group-name")
+
+    route_map_in: Optional[StrictStr] = Field(default=None, description="Route Map that should be applied for incoming routes", alias="route-map-in")
+
+    route_map_out: Optional[StrictStr] = Field(default=None, description="Route Map that should be applied for outgoing routes", alias="route-map-out")
 
     node: Annotated[str, Field(strict=True)] = Field(description="The cluster node name.")
 
@@ -46,7 +61,37 @@ class PveSdnControllerBgpConfig(BaseModel):
 
     type: StrictStr
 
-    __properties: ClassVar[List[str]] = ["node", "asn", "peers", "bgp-multipath-as-path-relax", "ebgp", "ebgp-multihop", "loopback", "type"]
+    __properties: ClassVar[List[str]] = ["bgp-mode", "controller", "lock-token", "nodes", "peer-group-name", "route-map-in", "route-map-out", "node", "asn", "peers", "bgp-multipath-as-path-relax", "ebgp", "ebgp-multihop", "loopback", "type"]
+
+
+
+    @field_validator('controller')
+    def controller_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if not isinstance(value, str):
+            value = str(value)
+
+        if not re.match(r"[a-zA-Z][a-zA-Z0-9_-]*[a-zA-Z0-9]", value):
+            raise ValueError(r"must validate the regular expression /[a-zA-Z][a-zA-Z0-9_-]*[a-zA-Z0-9]/")
+        return value
+
+
+
+
+    @field_validator('peer_group_name')
+    def peer_group_name_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if value is None:
+            return value
+
+        if not isinstance(value, str):
+            value = str(value)
+
+        if not re.match(r"^[A-Za-z][A-Za-z0-9_]*$", value):
+            raise ValueError(r"must validate the regular expression /^[A-Za-z][A-Za-z0-9_]*$/")
+        return value
+
+
 
 
     @field_validator('node')
@@ -112,8 +157,50 @@ class PveSdnControllerBgpConfig(BaseModel):
         _dict = self.model_dump(
             by_alias=True,
             exclude=excluded_fields,
+            # `exclude_unset` keeps schema defaults out of the wire payload
+            # when the user constructed the model directly (e.g.
+            # `Req(vmid=100)` would otherwise pull in
+            # `cores=1, cpulimit=0, …` from the spec defaults and PVE
+            # rejects the request with 400 because it never set those).
+            # `exclude_none` keeps None values out of the wire payload —
+            # both for direct construction (None means "unset") and for
+            # the from_dict path (where unspecified obj keys become
+            # `obj.get("k") == None` but show up in `model_fields_set`).
+            exclude_unset=True,
             exclude_none=True,
         )
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         return _dict
 
     @classmethod
@@ -126,6 +213,13 @@ class PveSdnControllerBgpConfig(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "bgp-mode": obj.get("bgp-mode"),
+            "controller": obj.get("controller"),
+            "lock-token": obj.get("lock-token"),
+            "nodes": obj.get("nodes"),
+            "peer-group-name": obj.get("peer-group-name") if obj.get("peer-group-name") is not None else 'VTEP',
+            "route-map-in": obj.get("route-map-in"),
+            "route-map-out": obj.get("route-map-out"),
             "node": obj.get("node"),
             "asn": obj.get("asn"),
             "peers": obj.get("peers"),
