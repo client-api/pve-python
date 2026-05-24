@@ -28,17 +28,17 @@ class NodesTasksNodeTasksResponseDataInner(BaseModel):
     NodesTasksNodeTasksResponseDataInner
     """ # noqa: E501
 
-    endtime: Optional[StrictInt] = None
+    endtime: Optional[int] = None
 
     id: StrictStr
 
     node: StrictStr
 
-    pid: StrictInt
+    pid: int
 
-    pstart: StrictInt
+    pstart: int
 
-    starttime: StrictInt
+    starttime: int
 
     status: Optional[StrictStr] = None
 

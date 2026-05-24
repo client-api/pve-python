@@ -28,13 +28,13 @@ class NodesStatusStatusResponseDataRootfs(BaseModel):
     NodesStatusStatusResponseDataRootfs
     """ # noqa: E501
 
-    avail: StrictInt = Field(description="The available bytes in the root filesystem.")
+    avail: int = Field(description="The available bytes in the root filesystem.")
 
-    free: StrictInt = Field(description="The free bytes on the root filesystem.")
+    free: int = Field(description="The free bytes on the root filesystem.")
 
-    total: StrictInt = Field(description="The total size of the root filesystem in bytes.")
+    total: int = Field(description="The total size of the root filesystem in bytes.")
 
-    used: StrictInt = Field(description="The used bytes in the root filesystem.")
+    used: int = Field(description="The used bytes in the root filesystem.")
 
     __properties: ClassVar[List[str]] = ["avail", "free", "total", "used"]
 

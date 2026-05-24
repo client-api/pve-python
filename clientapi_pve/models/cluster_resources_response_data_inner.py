@@ -33,7 +33,7 @@ class ClusterResourcesResponseDataInner(BaseModel):
     ClusterResourcesResponseDataInner
     """ # noqa: E501
 
-    cgroup_mode: Optional[StrictInt] = Field(default=None, description="The cgroup mode the node operates under (for type 'node').", alias="cgroup-mode")
+    cgroup_mode: Optional[int] = Field(default=None, description="The cgroup mode the node operates under (for type 'node').", alias="cgroup-mode")
 
     content: Optional[StrictStr] = Field(default=None, description="Allowed storage content types (for type 'storage').")
 
@@ -41,9 +41,9 @@ class ClusterResourcesResponseDataInner(BaseModel):
 
     disk: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(default=None, description="Used disk space in bytes (for type 'storage'), used root image space for VMs (for types 'qemu' and 'lxc').")
 
-    diskread: Optional[StrictInt] = Field(default=None, description="The number of bytes the guest read from its block devices since the guest was started. This info is not available for all storage types. (for types 'qemu' and 'lxc')")
+    diskread: Optional[int] = Field(default=None, description="The number of bytes the guest read from its block devices since the guest was started. This info is not available for all storage types. (for types 'qemu' and 'lxc')")
 
-    diskwrite: Optional[StrictInt] = Field(default=None, description="The number of bytes the guest wrote to its block devices since the guest was started. This info is not available for all storage types. (for types 'qemu' and 'lxc')")
+    diskwrite: Optional[int] = Field(default=None, description="The number of bytes the guest wrote to its block devices since the guest was started. This info is not available for all storage types. (for types 'qemu' and 'lxc')")
 
     hastate: Optional[StrictStr] = Field(default=None, description="HA service status (for HA managed VMs).")
 
@@ -59,7 +59,7 @@ class ClusterResourcesResponseDataInner(BaseModel):
 
     maxdisk: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(default=None, description="Storage size in bytes (for type 'storage'), root image size for VMs (for types 'qemu' and 'lxc').")
 
-    maxmem: Optional[StrictInt] = Field(default=None, description="Number of available memory in bytes (for types 'node', 'qemu' and 'lxc').")
+    maxmem: Optional[int] = Field(default=None, description="Number of available memory in bytes (for types 'node', 'qemu' and 'lxc').")
 
     mem: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(default=None, description="Used memory in bytes (for types 'node', 'qemu' and 'lxc').")
 
@@ -67,9 +67,9 @@ class ClusterResourcesResponseDataInner(BaseModel):
 
     name: Optional[StrictStr] = Field(default=None, description="Name of the resource.")
 
-    netin: Optional[StrictInt] = Field(default=None, description="The amount of traffic in bytes that was sent to the guest over the network since it was started. (for types 'qemu' and 'lxc')")
+    netin: Optional[int] = Field(default=None, description="The amount of traffic in bytes that was sent to the guest over the network since it was started. (for types 'qemu' and 'lxc')")
 
-    netout: Optional[StrictInt] = Field(default=None, description="The amount of traffic in bytes that was sent from the guest over the network since it was started. (for types 'qemu' and 'lxc')")
+    netout: Optional[int] = Field(default=None, description="The amount of traffic in bytes that was sent from the guest over the network since it was started. (for types 'qemu' and 'lxc')")
 
     network: Optional[StrictStr] = Field(default=None, description="The name of a Network entity (for type 'network').")
 
@@ -97,7 +97,7 @@ class ClusterResourcesResponseDataInner(BaseModel):
 
     type: PveClusterTypeEnum2 = Field(description="Resource type.")
 
-    uptime: Optional[StrictInt] = Field(default=None, description="Uptime of node or virtual guest in seconds (for types 'node', 'qemu' and 'lxc').")
+    uptime: Optional[int] = Field(default=None, description="Uptime of node or virtual guest in seconds (for types 'node', 'qemu' and 'lxc').")
 
     vmid: Optional[Annotated[int, Field(le=999999999, strict=True, ge=100)]] = Field(default=None, description="The numerical vmid (for types 'qemu' and 'lxc').")
 

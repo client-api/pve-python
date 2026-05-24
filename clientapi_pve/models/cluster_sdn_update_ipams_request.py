@@ -37,7 +37,7 @@ class ClusterSdnUpdateIpamsRequest(BaseModel):
 
     lock_token: Optional[StrictStr] = Field(default=None, description="the token for unlocking the global SDN configuration", alias="lock-token")
 
-    section: Optional[StrictInt] = None
+    section: Optional[int] = None
 
     token: Optional[StrictStr] = None
 

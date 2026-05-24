@@ -35,7 +35,7 @@ class QemuSnapshotListResponseDataInner(BaseModel):
 
     parent: Optional[StrictStr] = Field(default=None, description="Parent snapshot identifier.")
 
-    snaptime: Optional[StrictInt] = Field(default=None, description="Snapshot creation time")
+    snaptime: Optional[int] = Field(default=None, description="Snapshot creation time")
 
     vmstate: Optional[PveBoolean] = Field(default=None, description="Snapshot includes RAM.")
 

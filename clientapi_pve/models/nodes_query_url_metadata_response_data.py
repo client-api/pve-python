@@ -32,7 +32,7 @@ class NodesQueryUrlMetadataResponseData(BaseModel):
 
     mimetype: Optional[StrictStr] = None
 
-    size: Optional[StrictInt] = None
+    size: Optional[int] = None
 
     __properties: ClassVar[List[str]] = ["filename", "mimetype", "size"]
 

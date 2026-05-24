@@ -31,7 +31,7 @@ class NodesStorageGetContentResponseDataInner(BaseModel):
     NodesStorageGetContentResponseDataInner
     """ # noqa: E501
 
-    approximate_size: Optional[StrictInt] = Field(default=None, description="Approximate volume size in bytes. Present instead of 'size' for storages where determining the exact size has technical limitations. Will typically be an upper bound on the actual size, but the exact semantics depend on the storage plugin.", alias="approximate-size")
+    approximate_size: Optional[int] = Field(default=None, description="Approximate volume size in bytes. Present instead of 'size' for storages where determining the exact size has technical limitations. Will typically be an upper bound on the actual size, but the exact semantics depend on the storage plugin.", alias="approximate-size")
 
     ctime: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(default=None, description="Creation time (seconds since the UNIX Epoch).")
 
@@ -45,13 +45,13 @@ class NodesStorageGetContentResponseDataInner(BaseModel):
 
     protected: Optional[PveBoolean] = Field(default=None, description="Protection status. Currently only supported for backups.")
 
-    size: Optional[StrictInt] = Field(default=None, description="Volume size in bytes.")
+    size: Optional[int] = Field(default=None, description="Volume size in bytes.")
 
-    used: Optional[StrictInt] = Field(default=None, description="Used space. Please note that most storage plugins do not report anything useful here.")
+    used: Optional[int] = Field(default=None, description="Used space. Please note that most storage plugins do not report anything useful here.")
 
     verification: Optional[NodesStorageGetContentResponseDataInnerVerification] = None
 
-    vmid: Optional[StrictInt] = Field(default=None, description="Associated Owner VMID.")
+    vmid: Optional[int] = Field(default=None, description="Associated Owner VMID.")
 
     volid: StrictStr = Field(description="Volume identifier.")
 

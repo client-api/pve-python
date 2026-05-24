@@ -30,7 +30,7 @@ class AccessTfaListTfaResponseDataInnerEntriesInner(BaseModel):
     AccessTfaListTfaResponseDataInnerEntriesInner
     """ # noqa: E501
 
-    created: StrictInt = Field(description="Creation time of this entry as unix epoch.")
+    created: int = Field(description="Creation time of this entry as unix epoch.")
 
     description: StrictStr = Field(description="User chosen description for this entry.")
 

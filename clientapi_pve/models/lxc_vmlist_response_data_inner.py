@@ -31,41 +31,41 @@ class LxcVmlistResponseDataInner(BaseModel):
     LxcVmlistResponseDataInner
     """ # noqa: E501
 
-    cpu: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Current CPU usage.")
+    cpu: Optional[Union[float, int]] = Field(default=None, description="Current CPU usage.")
 
-    cpus: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Maximum usable CPUs.")
+    cpus: Optional[Union[float, int]] = Field(default=None, description="Maximum usable CPUs.")
 
     disk: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(default=None, description="Root disk image space-usage in bytes.")
 
-    diskread: Optional[StrictInt] = Field(default=None, description="The amount of bytes the guest read from it's block devices since the guest was started. (Note: This info is not available for all storage types.)")
+    diskread: Optional[int] = Field(default=None, description="The amount of bytes the guest read from it's block devices since the guest was started. (Note: This info is not available for all storage types.)")
 
-    diskwrite: Optional[StrictInt] = Field(default=None, description="The amount of bytes the guest wrote from it's block devices since the guest was started. (Note: This info is not available for all storage types.)")
+    diskwrite: Optional[int] = Field(default=None, description="The amount of bytes the guest wrote from it's block devices since the guest was started. (Note: This info is not available for all storage types.)")
 
     lock: Optional[StrictStr] = Field(default=None, description="The current config lock, if any.")
 
-    maxdisk: Optional[StrictInt] = Field(default=None, description="Root disk image size in bytes.")
+    maxdisk: Optional[int] = Field(default=None, description="Root disk image size in bytes.")
 
-    maxmem: Optional[StrictInt] = Field(default=None, description="Maximum memory in bytes.")
+    maxmem: Optional[int] = Field(default=None, description="Maximum memory in bytes.")
 
-    maxswap: Optional[StrictInt] = Field(default=None, description="Maximum SWAP memory in bytes.")
+    maxswap: Optional[int] = Field(default=None, description="Maximum SWAP memory in bytes.")
 
-    mem: Optional[StrictInt] = Field(default=None, description="Currently used memory in bytes.")
+    mem: Optional[int] = Field(default=None, description="Currently used memory in bytes.")
 
     name: Optional[StrictStr] = Field(default=None, description="Container name.")
 
-    netin: Optional[StrictInt] = Field(default=None, description="The amount of traffic in bytes that was sent to the guest over the network since it was started.")
+    netin: Optional[int] = Field(default=None, description="The amount of traffic in bytes that was sent to the guest over the network since it was started.")
 
-    netout: Optional[StrictInt] = Field(default=None, description="The amount of traffic in bytes that was sent from the guest over the network since it was started.")
+    netout: Optional[int] = Field(default=None, description="The amount of traffic in bytes that was sent from the guest over the network since it was started.")
 
-    pressurecpusome: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="CPU Some pressure stall average over the last 10 seconds.")
+    pressurecpusome: Optional[Union[float, int]] = Field(default=None, description="CPU Some pressure stall average over the last 10 seconds.")
 
-    pressureiofull: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="IO Full pressure stall average over the last 10 seconds.")
+    pressureiofull: Optional[Union[float, int]] = Field(default=None, description="IO Full pressure stall average over the last 10 seconds.")
 
-    pressureiosome: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="IO Some pressure stall average over the last 10 seconds.")
+    pressureiosome: Optional[Union[float, int]] = Field(default=None, description="IO Some pressure stall average over the last 10 seconds.")
 
-    pressurememoryfull: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Memory Full pressure stall average over the last 10 seconds.")
+    pressurememoryfull: Optional[Union[float, int]] = Field(default=None, description="Memory Full pressure stall average over the last 10 seconds.")
 
-    pressurememorysome: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Memory Some pressure stall average over the last 10 seconds.")
+    pressurememorysome: Optional[Union[float, int]] = Field(default=None, description="Memory Some pressure stall average over the last 10 seconds.")
 
     status: PveStatusEnum = Field(description="LXC Container status.")
 
@@ -73,7 +73,7 @@ class LxcVmlistResponseDataInner(BaseModel):
 
     template: Optional[PveBoolean] = Field(default=None, description="Determines if the guest is a template.")
 
-    uptime: Optional[StrictInt] = Field(default=None, description="Uptime in seconds.")
+    uptime: Optional[int] = Field(default=None, description="Uptime in seconds.")
 
     vmid: Annotated[int, Field(le=999999999, strict=True, ge=100)] = Field(description="The (unique) ID of the VM.")
 

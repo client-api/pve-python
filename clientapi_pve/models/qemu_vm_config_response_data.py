@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator, model_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing_extensions import Annotated
 from clientapi_pve.models.pve_arch_enum import PveArchEnum
@@ -48,6 +48,13 @@ from clientapi_pve.models.pve_qemu_vga_field import PveQemuVgaField
 from clientapi_pve.models.pve_qemu_virtio_field import PveQemuVirtioField
 from clientapi_pve.models.pve_qemu_virtiofs_field import PveQemuVirtiofsField
 from clientapi_pve.models.pve_scsihw_enum import PveScsihwEnum
+# openapi-generator computes the pydantic import line from the symbols
+# it sees in the model body, but it doesn't notice our
+# `@model_validator(mode='before')` decorator below (added in this
+# template, not by the generator). Import it explicitly so the file
+# loads without ImportError on the aggregator validator we emit for
+# every indexed-family map.
+from pydantic import model_validator
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python

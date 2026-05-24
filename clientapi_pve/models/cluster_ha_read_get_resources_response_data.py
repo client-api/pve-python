@@ -41,9 +41,9 @@ class ClusterHaReadGetResourcesResponseData(BaseModel):
 
     group: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="The HA group identifier.")
 
-    max_relocate: Optional[StrictInt] = Field(default=None, description="Maximal number of service relocate tries when a service fails to start.")
+    max_relocate: Optional[int] = Field(default=None, description="Maximal number of service relocate tries when a service fails to start.")
 
-    max_restart: Optional[StrictInt] = Field(default=None, description="Maximal number of tries to restart the service on a node after its start failed.")
+    max_restart: Optional[int] = Field(default=None, description="Maximal number of tries to restart the service on a node after its start failed.")
 
     sid: StrictStr = Field(description="HA resource ID. This consists of a resource type followed by a resource specific name, separated with colon (example: vm:100 / ct:100). For virtual machines and containers, you can simply use the VM or CT id as a shortcut (example: 100).")
 

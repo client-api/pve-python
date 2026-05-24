@@ -37,7 +37,7 @@ class PveSdnZoneFaucetConfig(BaseModel):
 
     nodes: Optional[StrictStr] = Field(default=None, description="List of cluster node names.")
 
-    dp_id: StrictInt = Field(description="Faucet dataplane id", alias="dp-id")
+    dp_id: int = Field(description="Faucet dataplane id", alias="dp-id")
 
     controller: StrictStr = Field(description="Controller for this zone.")
 

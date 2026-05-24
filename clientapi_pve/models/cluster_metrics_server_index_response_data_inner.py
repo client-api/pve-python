@@ -33,7 +33,7 @@ class ClusterMetricsServerIndexResponseDataInner(BaseModel):
 
     id: StrictStr = Field(description="The ID of the entry.")
 
-    port: StrictInt = Field(description="Server network port")
+    port: int = Field(description="Server network port")
 
     server: StrictStr = Field(description="Server dns name or IP address")
 

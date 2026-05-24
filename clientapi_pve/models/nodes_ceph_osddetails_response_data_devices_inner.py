@@ -36,7 +36,7 @@ class NodesCephOsddetailsResponseDataDevicesInner(BaseModel):
 
     physical_device: StrictStr = Field(description="Underlying physical device(s) used by this OSD device (comma- or space-joined when multiple).")
 
-    size: StrictInt = Field(description="Size of the OSD device in bytes.")
+    size: int = Field(description="Size of the OSD device in bytes.")
 
     support_discard: PveBoolean = Field(description="Whether the underlying physical device supports discard/TRIM.")
 

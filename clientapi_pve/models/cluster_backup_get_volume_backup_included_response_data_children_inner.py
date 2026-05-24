@@ -32,7 +32,7 @@ class ClusterBackupGetVolumeBackupIncludedResponseDataChildrenInner(BaseModel):
 
     children: Optional[List[ClusterBackupGetVolumeBackupIncludedResponseDataChildrenInnerChildrenInner]] = Field(default=None, description="The volumes of the guest with the information if they will be included in backups.")
 
-    id: StrictInt = Field(description="VMID of the guest.")
+    id: int = Field(description="VMID of the guest.")
 
     name: Optional[StrictStr] = Field(default=None, description="Name of the guest")
 

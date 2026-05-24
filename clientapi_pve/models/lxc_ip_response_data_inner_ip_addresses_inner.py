@@ -32,7 +32,7 @@ class LxcIpResponseDataInnerIpAddressesInner(BaseModel):
 
     ip_address_type: Optional[StrictStr] = Field(default=None, description="IP-Family", alias="ip-address-type")
 
-    prefix: Optional[StrictInt] = Field(default=None, description="IP-Prefix")
+    prefix: Optional[int] = Field(default=None, description="IP-Prefix")
 
     __properties: ClassVar[List[str]] = ["ip-address", "ip-address-type", "prefix"]
 

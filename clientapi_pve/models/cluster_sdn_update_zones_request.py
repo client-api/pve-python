@@ -52,7 +52,7 @@ class ClusterSdnUpdateZonesRequest(BaseModel):
 
     dnszone: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="dns domain zone  ex: mydomain.com")
 
-    dp_id: Optional[StrictInt] = Field(default=None, description="Faucet dataplane id", alias="dp-id")
+    dp_id: Optional[int] = Field(default=None, description="Faucet dataplane id", alias="dp-id")
 
     exitnodes: Optional[StrictStr] = Field(default=None, description="List of cluster node names.")
 
@@ -68,7 +68,7 @@ class ClusterSdnUpdateZonesRequest(BaseModel):
 
     mac: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="Anycast logical router mac address.")
 
-    mtu: Optional[StrictInt] = Field(default=None, description="MTU of the zone, will be used for the created VNet bridges.")
+    mtu: Optional[int] = Field(default=None, description="MTU of the zone, will be used for the created VNet bridges.")
 
     nodes: Optional[StrictStr] = Field(default=None, description="List of cluster node names.")
 

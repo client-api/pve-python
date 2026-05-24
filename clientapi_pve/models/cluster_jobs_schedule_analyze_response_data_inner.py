@@ -28,7 +28,7 @@ class ClusterJobsScheduleAnalyzeResponseDataInner(BaseModel):
     ClusterJobsScheduleAnalyzeResponseDataInner
     """ # noqa: E501
 
-    timestamp: StrictInt = Field(description="UNIX timestamp for the run.")
+    timestamp: int = Field(description="UNIX timestamp for the run.")
 
     utc: StrictStr = Field(description="UTC timestamp for the run.")
 

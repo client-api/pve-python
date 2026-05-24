@@ -37,9 +37,9 @@ class NodesStorageInfoResponseData(BaseModel):
 
     protected: Optional[PveBoolean] = Field(default=None, description="Protection status. Currently only supported for backups.")
 
-    size: StrictInt = Field(description="Volume size in bytes.")
+    size: int = Field(description="Volume size in bytes.")
 
-    used: StrictInt = Field(description="Used space. Please note that most storage plugins do not report anything useful here.")
+    used: int = Field(description="Used space. Please note that most storage plugins do not report anything useful here.")
 
     __properties: ClassVar[List[str]] = ["format", "notes", "path", "protected", "size", "used"]
 

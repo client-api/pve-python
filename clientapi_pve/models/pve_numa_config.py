@@ -34,7 +34,7 @@ class PveNumaConfig(BaseModel):
 
     hostnodes: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="Host NUMA nodes to use.")
 
-    memory: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Amount of memory this NUMA node provides.")
+    memory: Optional[Union[float, int]] = Field(default=None, description="Amount of memory this NUMA node provides.")
 
     policy: Optional[PvePolicyEnum] = Field(default=None, description="NUMA allocation policy.")
 

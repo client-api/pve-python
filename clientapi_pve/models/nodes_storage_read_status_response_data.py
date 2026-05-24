@@ -31,7 +31,7 @@ class NodesStorageReadStatusResponseData(BaseModel):
 
     active: Optional[PveBoolean] = Field(default=None, description="Set when storage is accessible.")
 
-    avail: Optional[StrictInt] = Field(default=None, description="Available storage space in bytes.")
+    avail: Optional[int] = Field(default=None, description="Available storage space in bytes.")
 
     content: StrictStr = Field(description="Allowed storage content types.")
 
@@ -39,11 +39,11 @@ class NodesStorageReadStatusResponseData(BaseModel):
 
     shared: Optional[PveBoolean] = Field(default=None, description="Shared flag from storage configuration.")
 
-    total: Optional[StrictInt] = Field(default=None, description="Total storage space in bytes.")
+    total: Optional[int] = Field(default=None, description="Total storage space in bytes.")
 
     type: StrictStr = Field(description="Storage type.")
 
-    used: Optional[StrictInt] = Field(default=None, description="Used storage space in bytes.")
+    used: Optional[int] = Field(default=None, description="Used storage space in bytes.")
 
     __properties: ClassVar[List[str]] = ["active", "avail", "content", "enabled", "shared", "total", "type", "used"]
 

@@ -28,7 +28,7 @@ class NodesFirewallLogResponseDataInner(BaseModel):
     NodesFirewallLogResponseDataInner
     """ # noqa: E501
 
-    n: StrictInt = Field(description="Line number")
+    n: int = Field(description="Line number")
 
     t: StrictStr = Field(description="Line text")
 

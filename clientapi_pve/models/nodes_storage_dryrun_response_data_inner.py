@@ -29,13 +29,13 @@ class NodesStorageDryrunResponseDataInner(BaseModel):
     NodesStorageDryrunResponseDataInner
     """ # noqa: E501
 
-    ctime: StrictInt = Field(description="Creation time of the backup (seconds since the UNIX epoch).")
+    ctime: int = Field(description="Creation time of the backup (seconds since the UNIX epoch).")
 
     mark: PveNodesStorageMarkEnum = Field(description="Whether the backup would be kept or removed. Backups that are protected or don't use the standard naming scheme are not removed.")
 
     type: StrictStr = Field(description="One of 'qemu', 'lxc', 'openvz' or 'unknown'.")
 
-    vmid: Optional[StrictInt] = Field(default=None, description="The VM the backup belongs to.")
+    vmid: Optional[int] = Field(default=None, description="The VM the backup belongs to.")
 
     volid: StrictStr = Field(description="Backup volume ID.")
 

@@ -43,7 +43,7 @@ class NodesCephListmonResponseDataInner(BaseModel):
 
     quorum: Optional[PveBoolean] = Field(default=None, description="Set when the monitor is part of the current quorum.")
 
-    rank: Optional[StrictInt] = Field(default=None, description="Rank of the monitor within the mon map.")
+    rank: Optional[int] = Field(default=None, description="Rank of the monitor within the mon map.")
 
     service: Optional[PveBoolean] = Field(default=None, description="Set if a ceph-mon@<id> systemd unit is enabled on the hosting node; absent otherwise.")
 

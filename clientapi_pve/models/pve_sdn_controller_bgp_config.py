@@ -55,7 +55,7 @@ class PveSdnControllerBgpConfig(BaseModel):
 
     ebgp: Optional[PveBoolean] = Field(default=None, description="Enable eBGP (remote-as external).")
 
-    ebgp_multihop: Optional[StrictInt] = Field(default=None, description="Set maximum amount of hops for eBGP peers.", alias="ebgp-multihop")
+    ebgp_multihop: Optional[int] = Field(default=None, description="Set maximum amount of hops for eBGP peers.", alias="ebgp-multihop")
 
     loopback: Optional[StrictStr] = Field(default=None, description="Name of the loopback/dummy interface that provides the Router-IP.")
 

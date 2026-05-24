@@ -37,7 +37,7 @@ class PoolsGetPoolsResponseDataInnerMembersInner(BaseModel):
 
     type: PvePoolsTypeTypeEnum
 
-    vmid: Optional[StrictInt] = None
+    vmid: Optional[int] = None
 
     __properties: ClassVar[List[str]] = ["id", "node", "storage", "type", "vmid"]
 

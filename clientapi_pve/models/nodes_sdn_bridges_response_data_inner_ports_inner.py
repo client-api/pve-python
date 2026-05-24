@@ -32,11 +32,11 @@ class NodesSdnBridgesResponseDataInnerPortsInner(BaseModel):
 
     name: StrictStr = Field(description="The name of the bridge port.")
 
-    primary_vlan: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The primary VLAN configured for the port of this bridge (= PVID). Only for VLAN-aware bridges.")
+    primary_vlan: Optional[Union[float, int]] = Field(default=None, description="The primary VLAN configured for the port of this bridge (= PVID). Only for VLAN-aware bridges.")
 
     vlans: Optional[List[StrictStr]] = Field(default=None, description="A list of VLANs and VLAN ranges that are allowed for this bridge port in addition to the primary VLAN. Only for VLAN-aware bridges.")
 
-    vmid: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The ID of the guest that this interface belongs to.")
+    vmid: Optional[Union[float, int]] = Field(default=None, description="The ID of the guest that this interface belongs to.")
 
     __properties: ClassVar[List[str]] = ["index", "name", "primary_vlan", "vlans", "vmid"]
 

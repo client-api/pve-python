@@ -29,13 +29,13 @@ class NodesDisksGetLvmResponseDataChildrenInnerChildrenInner(BaseModel):
     NodesDisksGetLvmResponseDataChildrenInnerChildrenInner
     """ # noqa: E501
 
-    free: StrictInt = Field(description="The free bytes in the physical volume")
+    free: int = Field(description="The free bytes in the physical volume")
 
     leaf: PveBoolean
 
     name: StrictStr = Field(description="The name of the physical volume")
 
-    size: StrictInt = Field(description="The size of the physical volume in bytes")
+    size: int = Field(description="The size of the physical volume in bytes")
 
     __properties: ClassVar[List[str]] = ["free", "leaf", "name", "size"]
 

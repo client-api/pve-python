@@ -35,13 +35,13 @@ class NodesCertificatesUploadCustomCertResponseData(BaseModel):
 
     issuer: Optional[StrictStr] = Field(default=None, description="Certificate issuer name.")
 
-    notafter: Optional[StrictInt] = Field(default=None, description="Certificate's notAfter timestamp (UNIX epoch).")
+    notafter: Optional[int] = Field(default=None, description="Certificate's notAfter timestamp (UNIX epoch).")
 
-    notbefore: Optional[StrictInt] = Field(default=None, description="Certificate's notBefore timestamp (UNIX epoch).")
+    notbefore: Optional[int] = Field(default=None, description="Certificate's notBefore timestamp (UNIX epoch).")
 
     pem: Optional[StrictStr] = Field(default=None, description="Certificate in PEM format")
 
-    public_key_bits: Optional[StrictInt] = Field(default=None, description="Certificate's public key size", alias="public-key-bits")
+    public_key_bits: Optional[int] = Field(default=None, description="Certificate's public key size", alias="public-key-bits")
 
     public_key_type: Optional[StrictStr] = Field(default=None, description="Certificate's public key algorithm", alias="public-key-type")
 

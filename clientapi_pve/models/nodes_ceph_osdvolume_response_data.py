@@ -34,7 +34,7 @@ class NodesCephOsdvolumeResponseData(BaseModel):
 
     lv_path: StrictStr = Field(description="Path to the logical volume (LV).")
 
-    lv_size: StrictInt = Field(description="Size of the logical volume (LV).")
+    lv_size: int = Field(description="Size of the logical volume (LV).")
 
     lv_uuid: StrictStr = Field(description="UUID of the logical volume (LV).")
 

@@ -53,7 +53,7 @@ class PveNetConfig(BaseModel):
 
     name: Annotated[str, Field(strict=True)] = Field(description="Name of the network device as seen from inside the container. (lxc.network.name)")
 
-    rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Apply rate limiting to the interface")
+    rate: Optional[Union[float, int]] = Field(default=None, description="Apply rate limiting to the interface")
 
     tag: Optional[Annotated[int, Field(le=4094, strict=True, ge=1)]] = Field(default=None, description="VLAN tag for this interface.")
 

@@ -38,7 +38,7 @@ class PveSdnZoneSimpleConfig(BaseModel):
 
     nodes: Optional[StrictStr] = Field(default=None, description="List of cluster node names.")
 
-    mtu: Optional[StrictInt] = Field(default=None, description="MTU of the zone, will be used for the created VNet bridges.")
+    mtu: Optional[int] = Field(default=None, description="MTU of the zone, will be used for the created VNet bridges.")
 
     dns: Optional[StrictStr] = Field(default=None, description="dns api server")
 

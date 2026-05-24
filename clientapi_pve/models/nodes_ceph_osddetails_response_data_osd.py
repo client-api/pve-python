@@ -41,15 +41,15 @@ class NodesCephOsddetailsResponseDataOsd(BaseModel):
 
     hostname: StrictStr = Field(description="Name of the host containing the OSD.")
 
-    id: StrictInt = Field(description="ID of the OSD.")
+    id: int = Field(description="ID of the OSD.")
 
-    mem_usage: StrictInt = Field(description="Proportional set size (PSS) memory usage of the OSD daemon process in bytes; 0 when the process is not running.")
+    mem_usage: int = Field(description="Proportional set size (PSS) memory usage of the OSD daemon process in bytes; 0 when the process is not running.")
 
     osd_data: StrictStr = Field(description="Path to the OSD's data directory.")
 
     osd_objectstore: StrictStr = Field(description="The type of object store used.")
 
-    pid: Optional[StrictInt] = Field(default=None, description="OSD process ID; absent if the systemd unit for this OSD is not currently running.")
+    pid: Optional[int] = Field(default=None, description="OSD process ID; absent if the systemd unit for this OSD is not currently running.")
 
     version: StrictStr = Field(description="Ceph version of the OSD service.")
 

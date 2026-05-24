@@ -28,7 +28,7 @@ class NodesHardwareMdevscanResponseDataInner(BaseModel):
     NodesHardwareMdevscanResponseDataInner
     """ # noqa: E501
 
-    available: StrictInt = Field(description="The number of still available instances of this type.")
+    available: int = Field(description="The number of still available instances of this type.")
 
     description: StrictStr = Field(description="Additional description of the type.")
 

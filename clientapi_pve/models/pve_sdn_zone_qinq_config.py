@@ -45,7 +45,7 @@ class PveSdnZoneQinqConfig(BaseModel):
 
     bridge_disable_mac_learning: Optional[PveBoolean] = Field(default=None, description="Disable auto mac learning.", alias="bridge-disable-mac-learning")
 
-    mtu: Optional[StrictInt] = Field(default=None, description="MTU of the zone, will be used for the created VNet bridges.")
+    mtu: Optional[int] = Field(default=None, description="MTU of the zone, will be used for the created VNet bridges.")
 
     vlan_protocol: Optional[PveVlanProtocolEnum] = Field(default=None, description="Which VLAN protocol should be used for the creation of the QinQ zone.", alias="vlan-protocol")
 

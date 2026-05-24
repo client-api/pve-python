@@ -47,7 +47,7 @@ class NodesCephSetpoolRequest(BaseModel):
 
     target_size: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="The estimated target size of the pool for the PG autoscaler.")
 
-    target_size_ratio: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The estimated target ratio of the pool for the PG autoscaler.")
+    target_size_ratio: Optional[Union[float, int]] = Field(default=None, description="The estimated target ratio of the pool for the PG autoscaler.")
 
     __properties: ClassVar[List[str]] = ["application", "crush_rule", "min_size", "pg_autoscale_mode", "pg_num", "pg_num_min", "size", "target_size", "target_size_ratio"]
 

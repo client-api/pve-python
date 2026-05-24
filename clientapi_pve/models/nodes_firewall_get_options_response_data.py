@@ -59,9 +59,9 @@ class NodesFirewallGetOptionsResponseData(BaseModel):
 
     protection_synflood: Optional[PveBoolean] = Field(default=None, description="Enable synflood protection")
 
-    protection_synflood_burst: Optional[StrictInt] = Field(default=1000, description="Synflood protection rate burst by ip src.")
+    protection_synflood_burst: Optional[int] = Field(default=1000, description="Synflood protection rate burst by ip src.")
 
-    protection_synflood_rate: Optional[StrictInt] = Field(default=200, description="Synflood protection rate syn/sec by ip src.")
+    protection_synflood_rate: Optional[int] = Field(default=200, description="Synflood protection rate syn/sec by ip src.")
 
     smurf_log_level: Optional[PveLogEnum] = Field(default=None, description="Log level for SMURFS filter.")
 

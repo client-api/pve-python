@@ -30,7 +30,7 @@ class NodesAptRepositoriesResponseDataFilesInner(BaseModel):
     NodesAptRepositoriesResponseDataFilesInner
     """ # noqa: E501
 
-    digest: List[StrictInt] = Field(description="Digest of the file as bytes.")
+    digest: List[int] = Field(description="Digest of the file as bytes.")
 
     file_type: PveFileTypeEnum = Field(description="Format of the file.", alias="file-type")
 

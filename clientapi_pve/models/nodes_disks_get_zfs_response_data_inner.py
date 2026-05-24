@@ -28,19 +28,19 @@ class NodesDisksGetZfsResponseDataInner(BaseModel):
     NodesDisksGetZfsResponseDataInner
     """ # noqa: E501
 
-    alloc: StrictInt
+    alloc: int
 
-    dedup: Union[StrictFloat, StrictInt]
+    dedup: Union[float, int]
 
-    frag: StrictInt
+    frag: int
 
-    free: StrictInt
+    free: int
 
     health: StrictStr
 
     name: StrictStr
 
-    size: StrictInt
+    size: int
 
     __properties: ClassVar[List[str]] = ["alloc", "dedup", "frag", "free", "health", "name", "size"]
 

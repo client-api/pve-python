@@ -38,11 +38,11 @@ class ClusterSdnCreateDnsRequest(BaseModel):
 
     lock_token: Optional[StrictStr] = Field(default=None, description="the token for unlocking the global SDN configuration", alias="lock-token")
 
-    reversemaskv6: Optional[StrictInt] = None
+    reversemaskv6: Optional[int] = None
 
-    reversev6mask: Optional[StrictInt] = None
+    reversev6mask: Optional[int] = None
 
-    ttl: Optional[StrictInt] = None
+    ttl: Optional[int] = None
 
     type: PveClusterSdnTypeTypeEnum = Field(description="Plugin type.")
 

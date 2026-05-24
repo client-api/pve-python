@@ -31,7 +31,7 @@ class ClusterBulkActionStartRequest(BaseModel):
 
     max_workers: Optional[Annotated[int, Field(le=64, strict=True, ge=1)]] = Field(default=4, description="Defines the maximum number of tasks running concurrently.", alias="max-workers")
 
-    timeout: Optional[StrictInt] = Field(default=None, description="Default start timeout in seconds. Only valid for VMs. (default depends on the guest configuration).")
+    timeout: Optional[int] = Field(default=None, description="Default start timeout in seconds. Only valid for VMs. (default depends on the guest configuration).")
 
     vms: Optional[List[Annotated[int, Field(le=999999999, strict=True, ge=100)]]] = Field(default=None, description="Only consider guests from this list of VMIDs.")
 

@@ -28,7 +28,7 @@ class QemuExecResponseData(BaseModel):
     QemuExecResponseData
     """ # noqa: E501
 
-    pid: StrictInt = Field(description="The PID of the process started by the guest-agent.")
+    pid: int = Field(description="The PID of the process started by the guest-agent.")
 
     __properties: ClassVar[List[str]] = ["pid"]
 

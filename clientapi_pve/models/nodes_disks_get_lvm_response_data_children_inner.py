@@ -32,13 +32,13 @@ class NodesDisksGetLvmResponseDataChildrenInner(BaseModel):
 
     children: Optional[List[NodesDisksGetLvmResponseDataChildrenInnerChildrenInner]] = Field(default=None, description="The underlying physical volumes")
 
-    free: StrictInt = Field(description="The free bytes in the volume group")
+    free: int = Field(description="The free bytes in the volume group")
 
     leaf: PveBoolean
 
     name: StrictStr = Field(description="The name of the volume group")
 
-    size: StrictInt = Field(description="The size of the volume group in bytes")
+    size: int = Field(description="The size of the volume group in bytes")
 
     __properties: ClassVar[List[str]] = ["children", "free", "leaf", "name", "size"]
 

@@ -41,9 +41,9 @@ class ClusterHaStatusResponseDataInner(BaseModel):
 
     id: StrictStr = Field(description="Status entry ID (quorum, master, lrm:<node>, service:<sid>).")
 
-    max_relocate: Optional[StrictInt] = Field(default=None, description="For type 'service'.")
+    max_relocate: Optional[int] = Field(default=None, description="For type 'service'.")
 
-    max_restart: Optional[StrictInt] = Field(default=None, description="For type 'service'.")
+    max_restart: Optional[int] = Field(default=None, description="For type 'service'.")
 
     node: StrictStr = Field(description="Node associated to status entry.")
 
@@ -59,7 +59,7 @@ class ClusterHaStatusResponseDataInner(BaseModel):
 
     status: StrictStr = Field(description="Status of the entry (value depends on type).")
 
-    timestamp: Optional[StrictInt] = Field(default=None, description="For type 'lrm','master'. Timestamp of the status information.")
+    timestamp: Optional[int] = Field(default=None, description="For type 'lrm','master'. Timestamp of the status information.")
 
     type: StrictStr = Field(description="Type of status entry.")
 

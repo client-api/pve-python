@@ -37,19 +37,19 @@ class ClusterFirewallGetRulesResponseDataInner(BaseModel):
 
     dport: Optional[StrictStr] = Field(default=None, description="Restrict TCP/UDP destination port")
 
-    enable: Optional[StrictInt] = Field(default=None, description="Flag to enable/disable a rule")
+    enable: Optional[int] = Field(default=None, description="Flag to enable/disable a rule")
 
     icmp_type: Optional[StrictStr] = Field(default=None, description="Specify icmp-type. Only valid if proto equals 'icmp' or 'icmpv6'/'ipv6-icmp'", alias="icmp-type")
 
     iface: Optional[StrictStr] = Field(default=None, description="Network interface name. You have to use network configuration key names for VMs and containers")
 
-    ipversion: Optional[StrictInt] = Field(default=None, description="IP version (4 or 6) - automatically determined from source/dest addresses")
+    ipversion: Optional[int] = Field(default=None, description="IP version (4 or 6) - automatically determined from source/dest addresses")
 
     log: Optional[PveLogEnum] = Field(default=None, description="Log level for firewall rule")
 
     macro: Optional[StrictStr] = Field(default=None, description="Use predefined standard macro")
 
-    pos: StrictInt = Field(description="Rule position in the ruleset")
+    pos: int = Field(description="Rule position in the ruleset")
 
     proto: Optional[StrictStr] = Field(default=None, description="IP protocol. You can use protocol names ('tcp'/'udp') or simple numbers, as defined in '/etc/protocols'")
 

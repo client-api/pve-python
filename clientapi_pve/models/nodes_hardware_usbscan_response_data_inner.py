@@ -28,17 +28,17 @@ class NodesHardwareUsbscanResponseDataInner(BaseModel):
     NodesHardwareUsbscanResponseDataInner
     """ # noqa: E501
 
-    busnum: StrictInt
+    busnum: int
 
-    var_class: StrictInt = Field(alias="class")
+    var_class: int = Field(alias="class")
 
-    devnum: StrictInt
+    devnum: int
 
-    level: StrictInt
+    level: int
 
     manufacturer: Optional[StrictStr] = None
 
-    port: StrictInt
+    port: int
 
     prodid: StrictStr
 

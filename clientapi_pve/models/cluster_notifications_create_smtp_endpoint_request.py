@@ -49,7 +49,7 @@ class ClusterNotificationsCreateSmtpEndpointRequest(BaseModel):
 
     password: Optional[StrictStr] = Field(default=None, description="Password for SMTP authentication")
 
-    port: Optional[StrictInt] = Field(default=None, description="The port to be used. Defaults to 465 for TLS based connections, 587 for STARTTLS based connections and port 25 for insecure plain-text connections.")
+    port: Optional[int] = Field(default=None, description="The port to be used. Defaults to 465 for TLS based connections, 587 for STARTTLS based connections and port 25 for insecure plain-text connections.")
 
     server: StrictStr = Field(description="The address of the SMTP server.")
 

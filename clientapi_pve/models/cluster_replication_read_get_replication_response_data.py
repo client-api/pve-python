@@ -38,11 +38,11 @@ class ClusterReplicationReadGetReplicationResponseData(BaseModel):
 
     disable: Optional[PveBoolean] = Field(default=None, description="Flag to disable/deactivate the entry.")
 
-    guest: StrictInt = Field(description="Guest ID.")
+    guest: int = Field(description="Guest ID.")
 
     id: Annotated[str, Field(strict=True)] = Field(description="Replication Job ID. The ID is composed of a Guest ID and a job number, separated by a hyphen, i.e. '<GUEST>-<JOBNUM>'.")
 
-    jobnum: StrictInt = Field(description="Unique, sequential ID assigned to each job.")
+    jobnum: int = Field(description="Unique, sequential ID assigned to each job.")
 
     rate: Optional[Union[Annotated[float, Field(strict=True, ge=1)], Annotated[int, Field(strict=True, ge=1)]]] = Field(default=None, description="Rate limit in mbps (megabytes per second) as floating point number.")
 

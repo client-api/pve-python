@@ -28,13 +28,13 @@ class NodesStatusStatusResponseDataMemory(BaseModel):
     NodesStatusStatusResponseDataMemory
     """ # noqa: E501
 
-    available: StrictInt = Field(description="The available memory in bytes.")
+    available: int = Field(description="The available memory in bytes.")
 
-    free: StrictInt = Field(description="The free memory in bytes.")
+    free: int = Field(description="The free memory in bytes.")
 
-    total: StrictInt = Field(description="The total memory in bytes.")
+    total: int = Field(description="The total memory in bytes.")
 
-    used: StrictInt = Field(description="The used memory in bytes.")
+    used: int = Field(description="The used memory in bytes.")
 
     __properties: ClassVar[List[str]] = ["available", "free", "total", "used"]
 

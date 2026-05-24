@@ -46,11 +46,11 @@ class ClusterCephMetadataResponseDataOsdInner(BaseModel):
 
     hostname: StrictStr = Field(description="Hostname on which the service is running.")
 
-    id: StrictInt = Field(description="OSD ID.")
+    id: int = Field(description="OSD ID.")
 
-    mem_swap_kb: StrictInt = Field(description="Memory of the service currently in swap.")
+    mem_swap_kb: int = Field(description="Memory of the service currently in swap.")
 
-    mem_total_kb: StrictInt = Field(description="Memory consumption of the service.")
+    mem_total_kb: int = Field(description="Memory consumption of the service.")
 
     osd_data: StrictStr = Field(description="Path to the OSD data directory.")
 

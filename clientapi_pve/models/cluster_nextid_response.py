@@ -28,9 +28,9 @@ class ClusterNextidResponse(BaseModel):
     ClusterNextidResponse
     """ # noqa: E501
 
-    data: StrictInt
+    data: int
 
-    total: Optional[StrictInt] = Field(default=None, description="Optional total count, present for paginated list responses.")
+    total: Optional[int] = Field(default=None, description="Optional total count, present for paginated list responses.")
 
     changes: Optional[Dict[str, Any]] = Field(default=None, description="Optional change summary returned by some PUT operations (one entry per modified field).")
 

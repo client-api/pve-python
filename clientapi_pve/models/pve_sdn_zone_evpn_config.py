@@ -58,7 +58,7 @@ class PveSdnZoneEvpnConfig(BaseModel):
 
     vxlan_port: Optional[Annotated[int, Field(le=65536, strict=True, ge=1)]] = Field(default=4789, description="UDP port that should be used for the VXLAN tunnel (default 4789).", alias="vxlan-port")
 
-    mtu: Optional[StrictInt] = Field(default=None, description="MTU of the zone, will be used for the created VNet bridges.")
+    mtu: Optional[int] = Field(default=None, description="MTU of the zone, will be used for the created VNet bridges.")
 
     mac: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="Anycast logical router mac address.")
 

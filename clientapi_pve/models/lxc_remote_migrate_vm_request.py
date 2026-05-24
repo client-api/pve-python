@@ -46,7 +46,7 @@ class LxcRemoteMigrateVmRequest(BaseModel):
 
     target_vmid: Optional[Annotated[int, Field(le=999999999, strict=True, ge=100)]] = Field(default=None, description="The (unique) ID of the VM.", alias="target-vmid")
 
-    timeout: Optional[StrictInt] = Field(default=180, description="Timeout in seconds for shutdown for restart migration")
+    timeout: Optional[int] = Field(default=180, description="Timeout in seconds for shutdown for restart migration")
 
     __properties: ClassVar[List[str]] = ["bwlimit", "delete", "online", "restart", "target-bridge", "target-endpoint", "target-storage", "target-vmid", "timeout"]
 

@@ -33,11 +33,11 @@ class ClusterMetricsExportResponseDataDataInner(BaseModel):
 
     metric: StrictStr = Field(description="Name of the metric.")
 
-    timestamp: StrictInt = Field(description="Time at which this metric was observed")
+    timestamp: int = Field(description="Time at which this metric was observed")
 
     type: PveClusterMetricsTypeEnum = Field(description="Type of the metric.")
 
-    value: Union[StrictFloat, StrictInt] = Field(description="Metric value.")
+    value: Union[float, int] = Field(description="Metric value.")
 
     __properties: ClassVar[List[str]] = ["id", "metric", "timestamp", "type", "value"]
 

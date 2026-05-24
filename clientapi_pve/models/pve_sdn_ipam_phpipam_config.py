@@ -37,7 +37,7 @@ class PveSdnIpamPhpipamConfig(BaseModel):
 
     token: StrictStr
 
-    section: StrictInt
+    section: int
 
     fingerprint: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="Certificate SHA 256 fingerprint.")
 

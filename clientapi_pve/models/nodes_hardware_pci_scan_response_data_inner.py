@@ -37,7 +37,7 @@ class NodesHardwarePciScanResponseDataInner(BaseModel):
 
     id: StrictStr = Field(description="The PCI ID.")
 
-    iommugroup: StrictInt = Field(description="The IOMMU group in which the device is in. If no IOMMU group is detected, it is set to -1.")
+    iommugroup: int = Field(description="The IOMMU group in which the device is in. If no IOMMU group is detected, it is set to -1.")
 
     mdev: Optional[PveBoolean] = Field(default=None, description="If set, marks that the device is capable of creating mediated devices.")
 

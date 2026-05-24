@@ -37,9 +37,9 @@ class ClusterJobsSyncjobIndexResponseDataInner(BaseModel):
 
     id: StrictStr = Field(description="The ID of the entry.")
 
-    last_run: Optional[StrictInt] = Field(default=None, description="Last execution time of the job in seconds since the beginning of the UNIX epoch", alias="last-run")
+    last_run: Optional[int] = Field(default=None, description="Last execution time of the job in seconds since the beginning of the UNIX epoch", alias="last-run")
 
-    next_run: Optional[StrictInt] = Field(default=None, description="Next planned execution time of the job in seconds since the beginning of the UNIX epoch.", alias="next-run")
+    next_run: Optional[int] = Field(default=None, description="Next planned execution time of the job in seconds since the beginning of the UNIX epoch.", alias="next-run")
 
     realm: Annotated[str, Field(strict=True, max_length=32)] = Field(description="Authentication domain ID")
 

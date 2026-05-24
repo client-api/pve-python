@@ -28,15 +28,15 @@ class PveBwlimitConfig(BaseModel):
     PveBwlimitConfig
     """ # noqa: E501
 
-    clone: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="bandwidth limit in KiB/s for cloning disks")
+    clone: Optional[Union[float, int]] = Field(default=None, description="bandwidth limit in KiB/s for cloning disks")
 
-    default: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="default bandwidth limit in KiB/s")
+    default: Optional[Union[float, int]] = Field(default=None, description="default bandwidth limit in KiB/s")
 
-    migration: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="bandwidth limit in KiB/s for migrating guests (including moving local disks)")
+    migration: Optional[Union[float, int]] = Field(default=None, description="bandwidth limit in KiB/s for migrating guests (including moving local disks)")
 
-    move: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="bandwidth limit in KiB/s for moving disks")
+    move: Optional[Union[float, int]] = Field(default=None, description="bandwidth limit in KiB/s for moving disks")
 
-    restore: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="bandwidth limit in KiB/s for restoring guests from backups")
+    restore: Optional[Union[float, int]] = Field(default=None, description="bandwidth limit in KiB/s for restoring guests from backups")
 
     __properties: ClassVar[List[str]] = ["clone", "default", "migration", "move", "restore"]
 

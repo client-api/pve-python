@@ -30,13 +30,13 @@ class NodesDisksGetLvmthinResponseDataInner(BaseModel):
 
     lv: StrictStr = Field(description="The name of the thinpool.")
 
-    lv_size: StrictInt = Field(description="The size of the thinpool in bytes.")
+    lv_size: int = Field(description="The size of the thinpool in bytes.")
 
-    metadata_size: StrictInt = Field(description="The size of the metadata lv in bytes.")
+    metadata_size: int = Field(description="The size of the metadata lv in bytes.")
 
-    metadata_used: StrictInt = Field(description="The used bytes of the metadata lv.")
+    metadata_used: int = Field(description="The used bytes of the metadata lv.")
 
-    used: StrictInt = Field(description="The used bytes of the thinpool.")
+    used: int = Field(description="The used bytes of the thinpool.")
 
     vg: StrictStr = Field(description="The associated volume group.")
 

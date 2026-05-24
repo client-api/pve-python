@@ -28,7 +28,7 @@ class NodesCephLogResponseDataInner(BaseModel):
     NodesCephLogResponseDataInner
     """ # noqa: E501
 
-    n: StrictInt = Field(description="Log-file line number (1-based).")
+    n: int = Field(description="Log-file line number (1-based).")
 
     t: StrictStr = Field(description="Log line text.")
 

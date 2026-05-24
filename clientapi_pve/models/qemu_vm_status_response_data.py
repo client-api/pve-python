@@ -36,45 +36,45 @@ class QemuVmStatusResponseData(BaseModel):
 
     clipboard: Optional[PveClipboardEnum] = Field(default=None, description="Enable a specific clipboard. If not set, depending on the display type the SPICE one will be added.")
 
-    cpu: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Current CPU usage.")
+    cpu: Optional[Union[float, int]] = Field(default=None, description="Current CPU usage.")
 
-    cpus: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Maximum usable CPUs.")
+    cpus: Optional[Union[float, int]] = Field(default=None, description="Maximum usable CPUs.")
 
-    diskread: Optional[StrictInt] = Field(default=None, description="The amount of bytes the guest read from it's block devices since the guest was started. (Note: This info is not available for all storage types.)")
+    diskread: Optional[int] = Field(default=None, description="The amount of bytes the guest read from it's block devices since the guest was started. (Note: This info is not available for all storage types.)")
 
-    diskwrite: Optional[StrictInt] = Field(default=None, description="The amount of bytes the guest wrote from it's block devices since the guest was started. (Note: This info is not available for all storage types.)")
+    diskwrite: Optional[int] = Field(default=None, description="The amount of bytes the guest wrote from it's block devices since the guest was started. (Note: This info is not available for all storage types.)")
 
     ha: Dict[str, Any] = Field(description="HA manager service status.")
 
     lock: Optional[StrictStr] = Field(default=None, description="The current config lock, if any.")
 
-    maxdisk: Optional[StrictInt] = Field(default=None, description="Root disk size in bytes.")
+    maxdisk: Optional[int] = Field(default=None, description="Root disk size in bytes.")
 
-    maxmem: Optional[StrictInt] = Field(default=None, description="Maximum memory in bytes.")
+    maxmem: Optional[int] = Field(default=None, description="Maximum memory in bytes.")
 
-    mem: Optional[StrictInt] = Field(default=None, description="Currently used memory in bytes. Does not take into account kernel same-page merging (KSM). Uses information from ballooning when available.")
+    mem: Optional[int] = Field(default=None, description="Currently used memory in bytes. Does not take into account kernel same-page merging (KSM). Uses information from ballooning when available.")
 
-    memhost: Optional[StrictInt] = Field(default=None, description="Current memory usage on the host. Does not take into account kernel same-page merging (KSM).")
+    memhost: Optional[int] = Field(default=None, description="Current memory usage on the host. Does not take into account kernel same-page merging (KSM).")
 
     name: Optional[StrictStr] = Field(default=None, description="VM (host)name.")
 
-    netin: Optional[StrictInt] = Field(default=None, description="The amount of traffic in bytes that was sent to the guest over the network since it was started.")
+    netin: Optional[int] = Field(default=None, description="The amount of traffic in bytes that was sent to the guest over the network since it was started.")
 
-    netout: Optional[StrictInt] = Field(default=None, description="The amount of traffic in bytes that was sent from the guest over the network since it was started.")
+    netout: Optional[int] = Field(default=None, description="The amount of traffic in bytes that was sent from the guest over the network since it was started.")
 
-    pid: Optional[StrictInt] = Field(default=None, description="PID of the QEMU process, if the VM is running.")
+    pid: Optional[int] = Field(default=None, description="PID of the QEMU process, if the VM is running.")
 
-    pressurecpufull: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="CPU Full pressure stall average over the last 10 seconds.")
+    pressurecpufull: Optional[Union[float, int]] = Field(default=None, description="CPU Full pressure stall average over the last 10 seconds.")
 
-    pressurecpusome: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="CPU Some pressure stall average over the last 10 seconds.")
+    pressurecpusome: Optional[Union[float, int]] = Field(default=None, description="CPU Some pressure stall average over the last 10 seconds.")
 
-    pressureiofull: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="IO Full pressure stall average over the last 10 seconds.")
+    pressureiofull: Optional[Union[float, int]] = Field(default=None, description="IO Full pressure stall average over the last 10 seconds.")
 
-    pressureiosome: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="IO Some pressure stall average over the last 10 seconds.")
+    pressureiosome: Optional[Union[float, int]] = Field(default=None, description="IO Some pressure stall average over the last 10 seconds.")
 
-    pressurememoryfull: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Memory Full pressure stall average over the last 10 seconds.")
+    pressurememoryfull: Optional[Union[float, int]] = Field(default=None, description="Memory Full pressure stall average over the last 10 seconds.")
 
-    pressurememorysome: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Memory Some pressure stall average over the last 10 seconds.")
+    pressurememorysome: Optional[Union[float, int]] = Field(default=None, description="Memory Some pressure stall average over the last 10 seconds.")
 
     qmpstatus: Optional[StrictStr] = Field(default=None, description="VM run state from the 'query-status' QMP monitor command.")
 
@@ -92,7 +92,7 @@ class QemuVmStatusResponseData(BaseModel):
 
     template: Optional[PveBoolean] = Field(default=None, description="Determines if the guest is a template.")
 
-    uptime: Optional[StrictInt] = Field(default=None, description="Uptime in seconds.")
+    uptime: Optional[int] = Field(default=None, description="Uptime in seconds.")
 
     vmid: Annotated[int, Field(le=999999999, strict=True, ge=100)] = Field(description="The (unique) ID of the VM.")
 

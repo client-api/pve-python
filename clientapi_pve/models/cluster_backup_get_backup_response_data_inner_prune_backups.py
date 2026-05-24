@@ -31,17 +31,17 @@ class ClusterBackupGetBackupResponseDataInnerPruneBackups(BaseModel):
 
     keep_all: Optional[PveBoolean] = Field(default=None, description="Keep all backups. Conflicts with the other options when true.", alias="keep-all")
 
-    keep_daily: Optional[StrictInt] = Field(default=None, description="Keep backups for the last <N> different days. If there is morethan one backup for a single day, only the latest one is kept.", alias="keep-daily")
+    keep_daily: Optional[int] = Field(default=None, description="Keep backups for the last <N> different days. If there is morethan one backup for a single day, only the latest one is kept.", alias="keep-daily")
 
-    keep_hourly: Optional[StrictInt] = Field(default=None, description="Keep backups for the last <N> different hours. If there is morethan one backup for a single hour, only the latest one is kept.", alias="keep-hourly")
+    keep_hourly: Optional[int] = Field(default=None, description="Keep backups for the last <N> different hours. If there is morethan one backup for a single hour, only the latest one is kept.", alias="keep-hourly")
 
-    keep_last: Optional[StrictInt] = Field(default=None, description="Keep the last <N> backups.", alias="keep-last")
+    keep_last: Optional[int] = Field(default=None, description="Keep the last <N> backups.", alias="keep-last")
 
-    keep_monthly: Optional[StrictInt] = Field(default=None, description="Keep backups for the last <N> different months. If there is morethan one backup for a single month, only the latest one is kept.", alias="keep-monthly")
+    keep_monthly: Optional[int] = Field(default=None, description="Keep backups for the last <N> different months. If there is morethan one backup for a single month, only the latest one is kept.", alias="keep-monthly")
 
-    keep_weekly: Optional[StrictInt] = Field(default=None, description="Keep backups for the last <N> different weeks. If there is morethan one backup for a single week, only the latest one is kept.", alias="keep-weekly")
+    keep_weekly: Optional[int] = Field(default=None, description="Keep backups for the last <N> different weeks. If there is morethan one backup for a single week, only the latest one is kept.", alias="keep-weekly")
 
-    keep_yearly: Optional[StrictInt] = Field(default=None, description="Keep backups for the last <N> different years. If there is morethan one backup for a single year, only the latest one is kept.", alias="keep-yearly")
+    keep_yearly: Optional[int] = Field(default=None, description="Keep backups for the last <N> different years. If there is morethan one backup for a single year, only the latest one is kept.", alias="keep-yearly")
 
     __properties: ClassVar[List[str]] = ["keep-all", "keep-daily", "keep-hourly", "keep-last", "keep-monthly", "keep-weekly", "keep-yearly"]
 

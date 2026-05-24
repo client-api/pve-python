@@ -33,7 +33,7 @@ class ClusterMappingCreatePciRequestMapInnerOneOf(BaseModel):
 
     id: Annotated[str, Field(strict=True)] = Field(description="The vendor and device ID that is expected. Used for detecting hardware changes")
 
-    iommugroup: Optional[StrictInt] = Field(default=None, description="The IOMMU group in which the device is to be expected in. Used for detecting hardware changes.")
+    iommugroup: Optional[int] = Field(default=None, description="The IOMMU group in which the device is to be expected in. Used for detecting hardware changes.")
 
     node: Annotated[str, Field(strict=True)] = Field(description="The cluster node name.")
 

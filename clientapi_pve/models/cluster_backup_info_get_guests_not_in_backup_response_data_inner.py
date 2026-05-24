@@ -33,7 +33,7 @@ class ClusterBackupInfoGetGuestsNotInBackupResponseDataInner(BaseModel):
 
     type: PveClusterBackupInfoTypeEnum = Field(description="Type of the guest.")
 
-    vmid: StrictInt = Field(description="VMID of the guest.")
+    vmid: int = Field(description="VMID of the guest.")
 
     __properties: ClassVar[List[str]] = ["name", "type", "vmid"]
 

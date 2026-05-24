@@ -34,7 +34,7 @@ class ClusterBulkActionShutdownRequest(BaseModel):
 
     max_workers: Optional[Annotated[int, Field(le=64, strict=True, ge=1)]] = Field(default=4, description="Defines the maximum number of tasks running concurrently.", alias="max-workers")
 
-    timeout: Optional[StrictInt] = Field(default=180, description="Default shutdown timeout in seconds if none is configured for the guest.")
+    timeout: Optional[int] = Field(default=180, description="Default shutdown timeout in seconds if none is configured for the guest.")
 
     vms: Optional[List[Annotated[int, Field(le=999999999, strict=True, ge=100)]]] = Field(default=None, description="Only consider guests from this list of VMIDs.")
 

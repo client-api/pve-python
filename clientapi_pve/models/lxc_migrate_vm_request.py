@@ -40,7 +40,7 @@ class LxcMigrateVmRequest(BaseModel):
 
     target_storage: Optional[StrictStr] = Field(default=None, description="Mapping from source to target storages. Providing only a single storage ID maps all source storages to that storage. Providing the special value '1' will map each source storage to itself.", alias="target-storage")
 
-    timeout: Optional[StrictInt] = Field(default=180, description="Timeout in seconds for shutdown for restart migration")
+    timeout: Optional[int] = Field(default=180, description="Timeout in seconds for shutdown for restart migration")
 
     __properties: ClassVar[List[str]] = ["bwlimit", "online", "restart", "target", "target-storage", "timeout"]
 

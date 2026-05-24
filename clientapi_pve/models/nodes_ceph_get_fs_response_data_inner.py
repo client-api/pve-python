@@ -30,13 +30,13 @@ class NodesCephGetFsResponseDataInner(BaseModel):
 
     data_pool: StrictStr = Field(description="Name of the filesystem's first data pool. A CephFS can have more than one data pool; consumers interested in the full set should read 'data_pools' instead. Kept for backwards compatibility.")
 
-    data_pool_ids: Optional[List[StrictInt]] = Field(default=None, description="Numeric ids of the data pools.")
+    data_pool_ids: Optional[List[int]] = Field(default=None, description="Numeric ids of the data pools.")
 
     data_pools: Optional[List[StrictStr]] = Field(default=None, description="Names of all data pools assigned to the filesystem; a CephFS can have multiple data pools (e.g. replicated metadata plus EC data, or multiple device-class-specific data pools).")
 
     metadata_pool: StrictStr = Field(description="Name of the metadata pool.")
 
-    metadata_pool_id: Optional[StrictInt] = Field(default=None, description="Numeric id of the metadata pool.")
+    metadata_pool_id: Optional[int] = Field(default=None, description="Numeric id of the metadata pool.")
 
     name: StrictStr = Field(description="The ceph filesystem name.")
 

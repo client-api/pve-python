@@ -49,7 +49,7 @@ class AccessUsersGetUsersResponseDataInner(BaseModel):
 
     realm_type: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="The type of the users realm", alias="realm-type")
 
-    tfa_locked_until: Optional[StrictInt] = Field(default=None, description="Contains a timestamp until when a user is locked out of 2nd factors.", alias="tfa-locked-until")
+    tfa_locked_until: Optional[int] = Field(default=None, description="Contains a timestamp until when a user is locked out of 2nd factors.", alias="tfa-locked-until")
 
     tokens: Optional[List[AccessUsersGetUsersResponseDataInnerTokensInner]] = None
 

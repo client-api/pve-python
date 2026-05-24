@@ -34,7 +34,7 @@ class LxcGetSnapshotResponseDataInner(BaseModel):
 
     parent: Optional[StrictStr] = Field(default=None, description="Parent snapshot identifier.")
 
-    snaptime: Optional[StrictInt] = Field(default=None, description="Snapshot creation time")
+    snaptime: Optional[int] = Field(default=None, description="Snapshot creation time")
 
     __properties: ClassVar[List[str]] = ["description", "name", "parent", "snaptime"]
 

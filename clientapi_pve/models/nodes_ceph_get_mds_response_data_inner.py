@@ -43,7 +43,7 @@ class NodesCephGetMdsResponseDataInner(BaseModel):
 
     name: StrictStr = Field(description="The name (ID) for the MDS.")
 
-    rank: Optional[StrictInt] = Field(default=None, description="MDS rank within the file system; -1 for standby MDSes not currently bound to a rank.")
+    rank: Optional[int] = Field(default=None, description="MDS rank within the file system; -1 for standby MDSes not currently bound to a rank.")
 
     service: Optional[PveBoolean] = Field(default=None, description="Set if a ceph-mds@<id> systemd unit is enabled on the hosting node; absent otherwise.")
 

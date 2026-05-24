@@ -33,33 +33,33 @@ class NodesCephLspoolsResponseDataInner(BaseModel):
 
     autoscale_status: Optional[Dict[str, Any]] = Field(default=None, description="Raw pg_autoscaler status object for this pool; shape varies between Ceph releases.")
 
-    bytes_used: Optional[StrictInt] = Field(default=None, description="Bytes currently used in the pool; absent if no usage statistics are reported.")
+    bytes_used: Optional[int] = Field(default=None, description="Bytes currently used in the pool; absent if no usage statistics are reported.")
 
-    crush_rule: StrictInt = Field(description="Numeric id of the CRUSH rule used by this pool.")
+    crush_rule: int = Field(description="Numeric id of the CRUSH rule used by this pool.")
 
     crush_rule_name: Optional[StrictStr] = Field(default=None, description="Human-readable name of the CRUSH rule used by this pool; absent if the rule id is not in the current CRUSH map.")
 
-    min_size: StrictInt = Field(description="Minimum number of replicas required to accept writes.")
+    min_size: int = Field(description="Minimum number of replicas required to accept writes.")
 
-    percent_used: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Percentage of pool capacity currently used; absent if no usage statistics are reported.")
+    percent_used: Optional[Union[float, int]] = Field(default=None, description="Percentage of pool capacity currently used; absent if no usage statistics are reported.")
 
     pg_autoscale_mode: Optional[StrictStr] = Field(default=None, description="Placement-group autoscaler mode ('on', 'warn' or 'off').")
 
-    pg_num: StrictInt = Field(description="Current placement-group count.")
+    pg_num: int = Field(description="Current placement-group count.")
 
-    pg_num_final: Optional[StrictInt] = Field(default=None, description="Optimal placement-group count computed by pg_autoscaler.")
+    pg_num_final: Optional[int] = Field(default=None, description="Optimal placement-group count computed by pg_autoscaler.")
 
-    pg_num_min: Optional[StrictInt] = Field(default=None, description="Minimum placement-group count the pg_autoscaler may choose.")
+    pg_num_min: Optional[int] = Field(default=None, description="Minimum placement-group count the pg_autoscaler may choose.")
 
-    pool: StrictInt = Field(description="Numeric pool id assigned by Ceph.")
+    pool: int = Field(description="Numeric pool id assigned by Ceph.")
 
     pool_name: StrictStr = Field(description="Operator-visible name of the pool.")
 
-    size: StrictInt = Field(description="Replication factor (target number of object replicas).")
+    size: int = Field(description="Replication factor (target number of object replicas).")
 
-    target_size: Optional[StrictInt] = Field(default=None, description="Operator-supplied target size in bytes; hints the pg_autoscaler.")
+    target_size: Optional[int] = Field(default=None, description="Operator-supplied target size in bytes; hints the pg_autoscaler.")
 
-    target_size_ratio: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Operator-supplied target ratio of total pool capacity; hints the pg_autoscaler.")
+    target_size_ratio: Optional[Union[float, int]] = Field(default=None, description="Operator-supplied target ratio of total pool capacity; hints the pg_autoscaler.")
 
     type: PveNodesCephTypeEnum = Field(description="Pool type: 'replicated' for n-way replication, 'erasure' for an erasure-coded pool, 'unknown' for types PVE does not yet map.")
 

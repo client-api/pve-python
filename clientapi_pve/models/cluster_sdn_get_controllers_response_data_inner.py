@@ -46,7 +46,7 @@ class ClusterSdnGetControllersResponseDataInner(BaseModel):
 
     ebgp: Optional[PveBoolean] = Field(default=None, description="Enable eBGP (remote-as external). BGP only.")
 
-    ebgp_multihop: Optional[StrictInt] = Field(default=None, description="Set maximum amount of hops for eBGP peers. Needs ebgp set to 1. BGP only.", alias="ebgp-multihop")
+    ebgp_multihop: Optional[int] = Field(default=None, description="Set maximum amount of hops for eBGP peers. Needs ebgp set to 1. BGP only.", alias="ebgp-multihop")
 
     isis_domain: Optional[StrictStr] = Field(default=None, description="Name of the IS-IS domain. IS-IS only.", alias="isis-domain")
 

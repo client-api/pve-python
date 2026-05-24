@@ -33,9 +33,9 @@ class NodesStorageGetListResponseDataInner(BaseModel):
 
     leaf: PveBoolean = Field(description="If this entry is a leaf in the directory graph.")
 
-    mtime: Optional[StrictInt] = Field(default=None, description="Entry last-modified time (unix timestamp).")
+    mtime: Optional[int] = Field(default=None, description="Entry last-modified time (unix timestamp).")
 
-    size: Optional[StrictInt] = Field(default=None, description="Entry file size.")
+    size: Optional[int] = Field(default=None, description="Entry file size.")
 
     text: StrictStr = Field(description="Entry display text.")
 

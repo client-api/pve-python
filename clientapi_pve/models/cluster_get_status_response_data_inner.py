@@ -40,9 +40,9 @@ class ClusterGetStatusResponseDataInner(BaseModel):
 
     name: StrictStr
 
-    nodeid: Optional[StrictInt] = Field(default=None, description="[node] ID of the node from the corosync configuration.")
+    nodeid: Optional[int] = Field(default=None, description="[node] ID of the node from the corosync configuration.")
 
-    nodes: Optional[StrictInt] = Field(default=None, description="[cluster] Nodes count, including offline nodes.")
+    nodes: Optional[int] = Field(default=None, description="[cluster] Nodes count, including offline nodes.")
 
     online: Optional[PveBoolean] = Field(default=None, description="[node] Indicates if the node is online or offline.")
 
@@ -50,7 +50,7 @@ class ClusterGetStatusResponseDataInner(BaseModel):
 
     type: PveClusterTypeEnum3 = Field(description="Indicates the type, either cluster or node. The type defines the object properties e.g. quorate available for type cluster.")
 
-    version: Optional[StrictInt] = Field(default=None, description="[cluster] Current version of the corosync configuration file.")
+    version: Optional[int] = Field(default=None, description="[cluster] Current version of the corosync configuration file.")
 
     __properties: ClassVar[List[str]] = ["id", "ip", "level", "local", "name", "nodeid", "nodes", "online", "quorate", "type", "version"]
 

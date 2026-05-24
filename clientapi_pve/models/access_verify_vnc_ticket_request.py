@@ -33,7 +33,7 @@ class AccessVerifyVncTicketRequest(BaseModel):
 
     path: Annotated[str, Field(strict=True, max_length=64)] = Field(description="Verify ticket, and check if user have access 'privs' on 'path'")
 
-    port: Optional[StrictInt] = Field(default=None, description="Verify that the ticket is valid for this port.")
+    port: Optional[int] = Field(default=None, description="Verify that the ticket is valid for this port.")
 
     privs: Annotated[str, Field(strict=True, max_length=64)] = Field(description="Verify ticket, and check if user have access 'privs' on 'path'")
 

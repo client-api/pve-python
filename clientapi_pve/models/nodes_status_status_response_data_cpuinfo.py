@@ -28,13 +28,13 @@ class NodesStatusStatusResponseDataCpuinfo(BaseModel):
     NodesStatusStatusResponseDataCpuinfo
     """ # noqa: E501
 
-    cores: StrictInt = Field(description="The number of physical cores of the CPU.")
+    cores: int = Field(description="The number of physical cores of the CPU.")
 
-    cpus: StrictInt = Field(description="The number of logical threads of the CPU.")
+    cpus: int = Field(description="The number of logical threads of the CPU.")
 
     model: StrictStr = Field(description="The CPU model")
 
-    sockets: StrictInt = Field(description="The number of logical threads of the CPU.")
+    sockets: int = Field(description="The number of logical threads of the CPU.")
 
     __properties: ClassVar[List[str]] = ["cores", "cpus", "model", "sockets"]
 

@@ -35,11 +35,11 @@ class NodesTasksReadTaskStatusResponseData(BaseModel):
 
     node: StrictStr
 
-    pid: StrictInt
+    pid: int
 
-    pstart: StrictInt
+    pstart: int
 
-    starttime: StrictInt
+    starttime: int
 
     status: PveNodesTasksStatusEnum
 

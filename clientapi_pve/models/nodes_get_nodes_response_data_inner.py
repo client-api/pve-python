@@ -30,15 +30,15 @@ class NodesGetNodesResponseDataInner(BaseModel):
     NodesGetNodesResponseDataInner
     """ # noqa: E501
 
-    cpu: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="CPU utilization.")
+    cpu: Optional[Union[float, int]] = Field(default=None, description="CPU utilization.")
 
     level: Optional[StrictStr] = Field(default=None, description="Support level.")
 
-    maxcpu: Optional[StrictInt] = Field(default=None, description="Number of available CPUs.")
+    maxcpu: Optional[int] = Field(default=None, description="Number of available CPUs.")
 
-    maxmem: Optional[StrictInt] = Field(default=None, description="Number of available memory in bytes.")
+    maxmem: Optional[int] = Field(default=None, description="Number of available memory in bytes.")
 
-    mem: Optional[StrictInt] = Field(default=None, description="Used memory in bytes.")
+    mem: Optional[int] = Field(default=None, description="Used memory in bytes.")
 
     node: Annotated[str, Field(strict=True)] = Field(description="The cluster node name.")
 
@@ -46,7 +46,7 @@ class NodesGetNodesResponseDataInner(BaseModel):
 
     status: PveNodesStatusEnum = Field(description="Node status.")
 
-    uptime: Optional[StrictInt] = Field(default=None, description="Node uptime in seconds.")
+    uptime: Optional[int] = Field(default=None, description="Node uptime in seconds.")
 
     id: Optional[StrictStr] = Field(default=None, description="Resource id of the form \"node/<name>\".")
 

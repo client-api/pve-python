@@ -44,7 +44,7 @@ class NodesCephGetpoolResponseData(BaseModel):
 
     hashpspool: PveBoolean = Field(description="Set if the pool hashes pool id into its CRUSH placement-seed.")
 
-    id: StrictInt = Field(description="Numeric pool id assigned by Ceph.")
+    id: int = Field(description="Numeric pool id assigned by Ceph.")
 
     min_size: Optional[Annotated[int, Field(le=7, strict=True, ge=1)]] = Field(default=2, description="Minimum number of replicas per object")
 
@@ -66,7 +66,7 @@ class NodesCephGetpoolResponseData(BaseModel):
 
     pg_num_min: Optional[Annotated[int, Field(le=32768, strict=True)]] = Field(default=None, description="Minimal number of placement groups.")
 
-    pgp_num: StrictInt = Field(description="Placement-group-for-placement count.")
+    pgp_num: int = Field(description="Placement-group-for-placement count.")
 
     size: Optional[Annotated[int, Field(le=7, strict=True, ge=1)]] = Field(default=3, description="Number of replicas per object")
 
@@ -74,7 +74,7 @@ class NodesCephGetpoolResponseData(BaseModel):
 
     target_size: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="The estimated target size of the pool for the PG autoscaler.")
 
-    target_size_ratio: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The estimated target ratio of the pool for the PG autoscaler.")
+    target_size_ratio: Optional[Union[float, int]] = Field(default=None, description="The estimated target ratio of the pool for the PG autoscaler.")
 
     use_gmt_hitset: PveBoolean = Field(description="Set if hitsets use GMT timestamps (for cache-tier pools).")
 

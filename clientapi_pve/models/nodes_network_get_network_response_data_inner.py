@@ -50,7 +50,7 @@ class NodesNetworkGetNetworkResponseDataInner(BaseModel):
 
     bond_xmit_hash_policy: Optional[PveBondXmitHashPolicyEnum] = Field(default=None, description="Selects the transmit hash policy to use for slave selection in balance-xor and 802.3ad modes.")
 
-    bridge_access: Optional[StrictInt] = Field(default=None, description="The bridge port access VLAN.", alias="bridge-access")
+    bridge_access: Optional[int] = Field(default=None, description="The bridge port access VLAN.", alias="bridge-access")
 
     bridge_arp_nd_suppress: Optional[PveBoolean] = Field(default=None, description="Bridge port ARP/ND suppress flag.", alias="bridge-arp-nd-suppress")
 
@@ -110,7 +110,7 @@ class NodesNetworkGetNetworkResponseDataInner(BaseModel):
 
     ovs_tag: Optional[Annotated[int, Field(le=4094, strict=True, ge=1)]] = Field(default=None, description="Specify a VLan tag (used by OVSPort, OVSIntPort, OVSBond)")
 
-    priority: Optional[StrictInt] = Field(default=None, description="The order of the interface.")
+    priority: Optional[int] = Field(default=None, description="The order of the interface.")
 
     slaves: Optional[StrictStr] = Field(default=None, description="Specify the interfaces used by the bonding device.")
 
@@ -124,7 +124,7 @@ class NodesNetworkGetNetworkResponseDataInner(BaseModel):
 
     vlan_raw_device: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="Specify the raw interface for the vlan interface.", alias="vlan-raw-device")
 
-    vxlan_id: Optional[StrictInt] = Field(default=None, description="The VXLAN ID.", alias="vxlan-id")
+    vxlan_id: Optional[int] = Field(default=None, description="The VXLAN ID.", alias="vxlan-id")
 
     vxlan_local_tunnelip: Optional[StrictStr] = Field(default=None, description="The VXLAN local tunnel IP.", alias="vxlan-local-tunnelip")
 

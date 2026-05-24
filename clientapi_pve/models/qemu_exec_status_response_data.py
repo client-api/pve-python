@@ -33,7 +33,7 @@ class QemuExecStatusResponseData(BaseModel):
 
     err_truncated: Optional[PveBoolean] = Field(default=None, description="true if stderr was not fully captured", alias="err-truncated")
 
-    exitcode: Optional[StrictInt] = Field(default=None, description="process exit code if it was normally terminated.")
+    exitcode: Optional[int] = Field(default=None, description="process exit code if it was normally terminated.")
 
     exited: PveBoolean = Field(description="Tells if the given command has exited yet.")
 
@@ -41,7 +41,7 @@ class QemuExecStatusResponseData(BaseModel):
 
     out_truncated: Optional[PveBoolean] = Field(default=None, description="true if stdout was not fully captured", alias="out-truncated")
 
-    signal: Optional[StrictInt] = Field(default=None, description="signal number or exception code if the process was abnormally terminated.")
+    signal: Optional[int] = Field(default=None, description="signal number or exception code if the process was abnormally terminated.")
 
     __properties: ClassVar[List[str]] = ["err-data", "err-truncated", "exitcode", "exited", "out-data", "out-truncated", "signal"]
 

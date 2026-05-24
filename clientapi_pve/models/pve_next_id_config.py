@@ -28,9 +28,9 @@ class PveNextIdConfig(BaseModel):
     PveNextIdConfig
     """ # noqa: E501
 
-    lower: Optional[StrictInt] = Field(default=100, description="Lower, inclusive boundary for free next-id API range.")
+    lower: Optional[int] = Field(default=100, description="Lower, inclusive boundary for free next-id API range.")
 
-    upper: Optional[StrictInt] = Field(default=1000000, description="Upper, exclusive boundary for free next-id API range.")
+    upper: Optional[int] = Field(default=1000000, description="Upper, exclusive boundary for free next-id API range.")
 
     __properties: ClassVar[List[str]] = ["lower", "upper"]
 

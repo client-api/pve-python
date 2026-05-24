@@ -58,7 +58,7 @@ class ClusterSdnGetZonesResponseDataInnerPending(BaseModel):
 
     mac: Optional[StrictStr] = Field(default=None, description="MAC address of the anycast router for this zone.")
 
-    mtu: Optional[StrictInt] = Field(default=None, description="MTU of the zone, will be used for the created VNet bridges.")
+    mtu: Optional[int] = Field(default=None, description="MTU of the zone, will be used for the created VNet bridges.")
 
     nodes: Optional[StrictStr] = Field(default=None, description="Nodes where this zone should be created.")
 

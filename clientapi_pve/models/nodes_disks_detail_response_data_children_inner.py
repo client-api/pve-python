@@ -28,17 +28,17 @@ class NodesDisksDetailResponseDataChildrenInner(BaseModel):
     NodesDisksDetailResponseDataChildrenInner
     """ # noqa: E501
 
-    cksum: Optional[Union[StrictFloat, StrictInt]] = None
+    cksum: Optional[Union[float, int]] = None
 
     msg: StrictStr = Field(description="An optional message about the vdev.")
 
     name: StrictStr = Field(description="The name of the vdev or section.")
 
-    read: Optional[Union[StrictFloat, StrictInt]] = None
+    read: Optional[Union[float, int]] = None
 
     state: Optional[StrictStr] = Field(default=None, description="The state of the vdev.")
 
-    write: Optional[Union[StrictFloat, StrictInt]] = None
+    write: Optional[Union[float, int]] = None
 
     __properties: ClassVar[List[str]] = ["cksum", "msg", "name", "read", "state", "write"]
 

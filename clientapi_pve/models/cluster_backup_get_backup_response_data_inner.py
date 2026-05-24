@@ -68,7 +68,7 @@ class ClusterBackupGetBackupResponseDataInner(BaseModel):
 
     mode: Optional[PveClusterBackupModeEnum] = Field(default=None, description="Backup mode.")
 
-    next_run: Optional[StrictInt] = Field(default=None, description="UNIX timestamp when this backup job will be executed next", alias="next-run")
+    next_run: Optional[int] = Field(default=None, description="UNIX timestamp when this backup job will be executed next", alias="next-run")
 
     node: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="Only run if executed on this node.")
 
@@ -80,7 +80,7 @@ class ClusterBackupGetBackupResponseDataInner(BaseModel):
 
     performance: Optional[ClusterBackupGetBackupResponseDataInnerPerformance] = None
 
-    pigz: Optional[StrictInt] = Field(default=0, description="Use pigz instead of gzip when N>0. N=1 uses half of cores, N>1 uses N as thread count.")
+    pigz: Optional[int] = Field(default=0, description="Use pigz instead of gzip when N>0. N=1 uses half of cores, N>1 uses N as thread count.")
 
     pool: Optional[StrictStr] = Field(default=None, description="Backup all known guest systems included in the specified pool.")
 
@@ -110,7 +110,7 @@ class ClusterBackupGetBackupResponseDataInner(BaseModel):
 
     vmid: Optional[StrictStr] = Field(default=None, description="The ID of the guest system you want to backup.")
 
-    zstd: Optional[StrictInt] = Field(default=1, description="Zstd threads. N=0 uses half of the available cores, if N is set to a value bigger than 0, N is used as thread count.")
+    zstd: Optional[int] = Field(default=1, description="Zstd threads. N=0 uses half of the available cores, if N is set to a value bigger than 0, N is used as thread count.")
 
     __properties: ClassVar[List[str]] = ["all", "bwlimit", "comment", "compress", "dumpdir", "enabled", "exclude", "exclude-path", "fleecing", "id", "ionice", "lockwait", "mailnotification", "mailto", "mode", "next-run", "node", "notes-template", "notification-mode", "pbs-change-detection-mode", "performance", "pigz", "pool", "protected", "prune-backups", "quiet", "remove", "repeat-missed", "schedule", "script", "stdexcludes", "stop", "stopwait", "storage", "tmpdir", "vmid", "zstd"]
 

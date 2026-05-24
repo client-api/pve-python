@@ -35,7 +35,7 @@ class NodesStatusStatusResponseData(BaseModel):
 
     boot_info: NodesStatusStatusResponseDataBootInfo = Field(alias="boot-info")
 
-    cpu: Union[StrictFloat, StrictInt] = Field(description="The current cpu usage.")
+    cpu: Union[float, int] = Field(description="The current cpu usage.")
 
     cpuinfo: NodesStatusStatusResponseDataCpuinfo
 

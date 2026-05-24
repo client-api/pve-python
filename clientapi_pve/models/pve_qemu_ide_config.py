@@ -41,17 +41,17 @@ class PveQemuIdeConfig(BaseModel):
 
     backup: Optional[PveBoolean] = Field(default=None, description="Whether the drive should be included when making backups.")
 
-    bps: Optional[StrictInt] = Field(default=None, description="Maximum r/w speed in bytes per second.")
+    bps: Optional[int] = Field(default=None, description="Maximum r/w speed in bytes per second.")
 
     bps_max_length: Optional[Annotated[int, Field(strict=True, ge=1)]] = Field(default=None, description="Maximum length of I/O bursts in seconds.")
 
-    bps_rd: Optional[StrictInt] = Field(default=None, description="Maximum read speed in bytes per second.")
+    bps_rd: Optional[int] = Field(default=None, description="Maximum read speed in bytes per second.")
 
     bps_rd_length: Optional[StrictStr] = None
 
     bps_rd_max_length: Optional[Annotated[int, Field(strict=True, ge=1)]] = Field(default=None, description="Maximum length of read I/O bursts in seconds.")
 
-    bps_wr: Optional[StrictInt] = Field(default=None, description="Maximum write speed in bytes per second.")
+    bps_wr: Optional[int] = Field(default=None, description="Maximum write speed in bytes per second.")
 
     bps_wr_length: Optional[StrictStr] = None
 
@@ -67,39 +67,39 @@ class PveQemuIdeConfig(BaseModel):
 
     format: Optional[PveFormatEnum] = Field(default=None, description="The drive's backing file's data format.")
 
-    iops: Optional[StrictInt] = Field(default=None, description="Maximum r/w I/O in operations per second.")
+    iops: Optional[int] = Field(default=None, description="Maximum r/w I/O in operations per second.")
 
-    iops_max: Optional[StrictInt] = Field(default=None, description="Maximum unthrottled r/w I/O pool in operations per second.")
+    iops_max: Optional[int] = Field(default=None, description="Maximum unthrottled r/w I/O pool in operations per second.")
 
     iops_max_length: Optional[Annotated[int, Field(strict=True, ge=1)]] = Field(default=None, description="Maximum length of I/O bursts in seconds.")
 
-    iops_rd: Optional[StrictInt] = Field(default=None, description="Maximum read I/O in operations per second.")
+    iops_rd: Optional[int] = Field(default=None, description="Maximum read I/O in operations per second.")
 
     iops_rd_length: Optional[StrictStr] = None
 
-    iops_rd_max: Optional[StrictInt] = Field(default=None, description="Maximum unthrottled read I/O pool in operations per second.")
+    iops_rd_max: Optional[int] = Field(default=None, description="Maximum unthrottled read I/O pool in operations per second.")
 
     iops_rd_max_length: Optional[Annotated[int, Field(strict=True, ge=1)]] = Field(default=None, description="Maximum length of read I/O bursts in seconds.")
 
-    iops_wr: Optional[StrictInt] = Field(default=None, description="Maximum write I/O in operations per second.")
+    iops_wr: Optional[int] = Field(default=None, description="Maximum write I/O in operations per second.")
 
     iops_wr_length: Optional[StrictStr] = None
 
-    iops_wr_max: Optional[StrictInt] = Field(default=None, description="Maximum unthrottled write I/O pool in operations per second.")
+    iops_wr_max: Optional[int] = Field(default=None, description="Maximum unthrottled write I/O pool in operations per second.")
 
     iops_wr_max_length: Optional[Annotated[int, Field(strict=True, ge=1)]] = Field(default=None, description="Maximum length of write I/O bursts in seconds.")
 
-    mbps: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Maximum r/w speed in megabytes per second.")
+    mbps: Optional[Union[float, int]] = Field(default=None, description="Maximum r/w speed in megabytes per second.")
 
-    mbps_max: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Maximum unthrottled r/w pool in megabytes per second.")
+    mbps_max: Optional[Union[float, int]] = Field(default=None, description="Maximum unthrottled r/w pool in megabytes per second.")
 
-    mbps_rd: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Maximum read speed in megabytes per second.")
+    mbps_rd: Optional[Union[float, int]] = Field(default=None, description="Maximum read speed in megabytes per second.")
 
-    mbps_rd_max: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Maximum unthrottled read pool in megabytes per second.")
+    mbps_rd_max: Optional[Union[float, int]] = Field(default=None, description="Maximum unthrottled read pool in megabytes per second.")
 
-    mbps_wr: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Maximum write speed in megabytes per second.")
+    mbps_wr: Optional[Union[float, int]] = Field(default=None, description="Maximum write speed in megabytes per second.")
 
-    mbps_wr_max: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Maximum unthrottled write pool in megabytes per second.")
+    mbps_wr_max: Optional[Union[float, int]] = Field(default=None, description="Maximum unthrottled write pool in megabytes per second.")
 
     media: Optional[PveMediaEnum] = Field(default=None, description="The drive's media type.")
 

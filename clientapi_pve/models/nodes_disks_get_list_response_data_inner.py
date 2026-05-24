@@ -39,15 +39,15 @@ class NodesDisksGetListResponseDataInner(BaseModel):
 
     mounted: PveBoolean
 
-    osdid: StrictInt
+    osdid: int
 
-    osdid_list: List[StrictInt] = Field(alias="osdid-list")
+    osdid_list: List[int] = Field(alias="osdid-list")
 
     parent: Optional[StrictStr] = Field(default=None, description="For partitions only. The device path of the disk the partition resides on.")
 
     serial: Optional[StrictStr] = None
 
-    size: StrictInt
+    size: int
 
     used: Optional[StrictStr] = None
 

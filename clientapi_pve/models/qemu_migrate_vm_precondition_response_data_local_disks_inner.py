@@ -33,7 +33,7 @@ class QemuMigrateVmPreconditionResponseDataLocalDisksInner(BaseModel):
 
     is_unused: PveBoolean = Field(description="True if the disk is unused.")
 
-    size: StrictInt = Field(description="The size of the disk in bytes.")
+    size: int = Field(description="The size of the disk in bytes.")
 
     volid: StrictStr = Field(description="The volid of the disk.")
 
