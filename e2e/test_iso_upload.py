@@ -14,6 +14,7 @@ from clientapi_pve.models.storage_create_storage_request import (
 )
 from e2e.conftest import requires_network
 from e2e.helpers.iso import download_boot_iso
+from e2e.helpers.poll import wait_until
 from e2e.helpers.upload import list_storage_content, upload_iso
 
 
@@ -49,13 +50,21 @@ def test_iso_download_upload_list_delete(pve: Pve, node: str, iso_storage: str) 
     filename = "e2e-boot.iso"
     upload_iso(pve, node, iso_storage, filename, data)
 
-    listing = list_storage_content(pve, node, iso_storage)
-    volids = [item.volid for item in listing]
-    matching = [v for v in volids if v.endswith(f"/{filename}")]
-    assert matching, f"uploaded ISO not in listing: {volids!r}"
+    # Upload returns a UPID; the file appears in the storage asynchronously
+    # once the imgcopy task finishes. Poll until visible (or timeout).
+    def _find_uploaded() -> str | None:
+        listing = list_storage_content(pve, node, iso_storage)
+        for item in listing:
+            volid = item.volid
+            if volid.endswith(f"/{filename}"):
+                return volid
+        return None
 
-    pve.nodesStorage.delete_content(node=node, storage=iso_storage, volume=matching[0])
+    volid = wait_until(_find_uploaded, timeout_s=30, interval_s=1, label=f"{filename} in listing")
+    pve.nodesStorage.delete_content(node=node, storage=iso_storage, volume=volid)
 
-    listing_after = list_storage_content(pve, node, iso_storage)
-    volids_after = [item.volid for item in listing_after]
-    assert not [v for v in volids_after if v.endswith(f"/{filename}")], volids_after
+    def _gone() -> bool:
+        listing_after = list_storage_content(pve, node, iso_storage)
+        return not any(item.volid.endswith(f"/{filename}") for item in listing_after)
+
+    wait_until(_gone, timeout_s=30, interval_s=1, label=f"{filename} gone from listing")
